@@ -6,6 +6,8 @@
 package utilisateurs.gestionnaires;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -14,6 +16,7 @@ import javax.ejb.Stateless;
 @Stateless
 public class GestionnaireEtudiants {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @PersistenceContext  
+    private EntityManager em;
+
 }

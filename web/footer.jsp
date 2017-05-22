@@ -4,6 +4,6 @@
     Author     : Aicha
 --%>
 
-<div id="footer">  
+<div class="footer">  
     Ceci est un pied de page.
 </div>

@@ -6,7 +6,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,9 +31,9 @@ public class ServletHome extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String forwardTo = "home.jsp";
-        String message = "Hello World";
-        RequestDispatcher dp = request.getRequestDispatcher(forwardTo + "&message=" + message);  
+
+        request.setAttribute("message", "Hello World");
+        RequestDispatcher dp = request.getRequestDispatcher("home.jsp");  
         dp.forward(request, response); 
     }
 
