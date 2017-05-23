@@ -6,6 +6,7 @@
 package utilisateurs.modeles;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,7 @@ public abstract class Utilisateur implements Serializable {
     private int id;
     private String nom;
     private String prenom;
+    @Column(unique=true)
     private String mdp;
     private String email;
     /**

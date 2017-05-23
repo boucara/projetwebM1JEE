@@ -5,7 +5,7 @@
  */
 package utilisateurs.gestionnaires;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,10 +21,8 @@ public class GestionnaireEnseignants {
     @PersistenceContext  
     private EntityManager em;
 
-    public Enseignant insererEnseignant(String nom, String prenom, String email, String mdp) {
-        Enseignant e = new Enseignant(nom, prenom, mdp, email);  
+    public void insererEnseignant(Enseignant e) { 
         em.persist(e);  
-        return e;
     }
 
     public Enseignant metreajourEnseignant(String email, String nom, String prenom, String mdp) {
@@ -38,11 +36,11 @@ public class GestionnaireEnseignants {
         return null;
     }
 
-    public ArrayList<Enseignant> selectEnseignants(int pagination) {
+    public Collection<Enseignant> selectEnseignants(int pagination) {
         return null;
     }
 
-    public ArrayList<Enseignant> selectEnseignants(String email, String nom, String prenom, int pagination) {
+    public Collection<Enseignant> selectEnseignants(String email, String nom, String prenom, int pagination) {
         return null;
     }
 
