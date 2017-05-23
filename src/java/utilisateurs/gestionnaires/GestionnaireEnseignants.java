@@ -22,7 +22,9 @@ public class GestionnaireEnseignants {
     private EntityManager em;
 
     public Enseignant insererEnseignant(String nom, String prenom, String email, String mdp) {
-        return null;
+        Enseignant e = new Enseignant(nom, prenom, mdp, email);  
+        em.persist(e);  
+        return e;
     }
 
     public Enseignant metreajourEnseignant(String email, String nom, String prenom, String mdp) {

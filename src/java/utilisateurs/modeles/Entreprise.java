@@ -7,24 +7,15 @@ package utilisateurs.modeles;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  *
  * @author Tom
  */
 @Entity
-public class Entreprise implements Serializable {
+public class Entreprise  extends Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private String nom;
-    private String prenom;
-    private String mdp;
-    private String email;
+
     private String fonction;
     private String tel;
     private String nomEntreprise;
@@ -35,10 +26,10 @@ public class Entreprise implements Serializable {
     }
 
     public Entreprise(String nom, String prenom, String mdp, String email) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.mdp = mdp;
-        this.email = email;
+        setEmail(email);
+        setMdp(mdp);
+        setNom(nom);
+        setPrenom(prenom);
     }
 
     /**
@@ -136,50 +127,12 @@ public class Entreprise implements Serializable {
     }
 
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getMdp() {
-        return mdp;
-    }
-
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) id;
+        hash += (int) getId();
         return hash;
     }
 
@@ -190,7 +143,7 @@ public class Entreprise implements Serializable {
             return false;
         }
         Entreprise other = (Entreprise) object;
-        if (this.id != other.id) {
+        if (getId() != other.getId()) {
             return false;
         }
         return true;
@@ -198,7 +151,7 @@ public class Entreprise implements Serializable {
 
     @Override
     public String toString() {
-        return "utilisateurs.modeles.Entreprise[ id=" + id + " ]";
+        return "utilisateurs.modeles.Entreprise[ id=" + getId() + " ]";
     }
     
 }

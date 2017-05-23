@@ -16,24 +16,13 @@ import javax.persistence.Id;
  * @author Tom
  */
 @Entity
-public class Etudiant implements Serializable {
+public class Etudiant extends Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) id;
+        hash += (int) getId();
         return hash;
     }
 
@@ -44,7 +33,7 @@ public class Etudiant implements Serializable {
             return false;
         }
         Etudiant other = (Etudiant) object;
-        if (this.id != other.id) {
+        if (getId() != other.getId()) {
             return false;
         }
         return true;
@@ -52,7 +41,7 @@ public class Etudiant implements Serializable {
 
     @Override
     public String toString() {
-        return "utilisateurs.modeles.Etudiants[ id=" + id + " ]";
+        return "utilisateurs.modeles.Etudiants[ id=" + getId() + " ]";
     }
     
 }

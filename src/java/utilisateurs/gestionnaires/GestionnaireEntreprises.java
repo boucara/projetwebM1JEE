@@ -22,10 +22,12 @@ public class GestionnaireEntreprises {
     private EntityManager em;
     
     public Entreprise insererEntreprise(String nom, String prenom, String email, String mdp) {
-        return null;
+        Entreprise e = new Entreprise(nom, prenom, mdp, email);  
+        em.persist(e);  
+        return e;
     }
 
-    public Entreprise metreajourEntreprise(String email, String nom, String prenom, String mdp) {
+    public Entreprise metreajourEntreprise(String email, String nom, String prenom, String mdp, String fonction, String tel, String nomEntreprise, String adresseEntreprise, String secteurActiviteEntreprise) {
         return null;
     }
 
