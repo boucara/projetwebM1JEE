@@ -13,9 +13,74 @@ and open the template in the editor.
 
 .main{
     text-align: center;
+     margin-top : 160px
 }
 
 .footer{
-    text-align: center
+    text-align: center;
+    margin-top : 160px
 }
 
+ /* Add a dark background color with a little bit see-through */
+.navbar {
+    margin-bottom: 0;
+    background-color: #C72C48;
+    border: 0;
+    font-size: 11px ;
+    letter-spacing: 4px;
+    opacity:0.9;
+}
+
+/* Add a gray color to all navbar links */
+.navbar li a, .navbar .navbar-brand {
+    color: #d5d5d5
+}
+
+/* On hover, the links will turn white */
+.navbar-nav li a:hover {
+    color:#C72C48 !important;
+}
+
+/* The active link */
+.navbar-nav li.active a {
+    color: #fff !important;
+    background-color:#29292c !important;
+}
+
+/* Remove border color from the collapsible button */
+
+
+/* Dropdown */
+.open .dropdown-toggle {
+    color: #C72C48;
+    background-color: #C72C48 ;
+}
+
+/* Dropdown links */
+#menu  {
+    color: #000 ;
+    background-color:#C72C48
+}
+
+.dropdown-menu li a {
+    color: #000 ;
+}
+
+/* On hover, the dropdown links will turn red */
+.dropdown-menu li a:hover {
+    background-color: red ;
+} 
+footer {
+    background-color: #C72C48;
+    color: #f5f5f5;
+    padding: 32px;
+}
+
+footer a {
+    color: #f5f5f5;
+}
+
+footer a:hover {
+    color: #777;
+    text-decoration: none;
+}
