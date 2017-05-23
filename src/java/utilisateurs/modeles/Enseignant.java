@@ -21,6 +21,94 @@ public class Enseignant implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    private String nom;
+    private String prenom;
+    private String mdp;
+    private String email;
+
+    public Enseignant() {
+    }
+
+    public Enseignant(String nom, String prenom, String mdp, String email) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mdp = mdp;
+        this.email = email;
+    }
+
+    /**
+     * Get the value of prenom
+     *
+     * @return the value of prenom
+     */
+    public String getPrenom() {
+        return prenom;
+    }
+
+    /**
+     * Set the value of prenom
+     *
+     * @param prenom new value of prenom
+     */
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    /**
+     * Get the value of email
+     *
+     * @return the value of email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Set the value of email
+     *
+     * @param email new value of email
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * Get the value of mdp
+     *
+     * @return the value of mdp
+     */
+    public String getMdp() {
+        return mdp;
+    }
+
+    /**
+     * Set the value of mdp
+     *
+     * @param mdp new value of mdp
+     */
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
+
+
+    /**
+     * Get the value of nom
+     *
+     * @return the value of nom
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * Set the value of nom
+     *
+     * @param nom new value of nom
+     */
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
 
     public int getId() {
         return id;
