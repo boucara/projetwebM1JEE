@@ -9,6 +9,7 @@ import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import utilisateurs.modeles.Enseignant;
 
 /**
@@ -30,6 +31,16 @@ public class GestionnaireEnseignants {
     }
 
     public void supprimerEnseignant(String email) {
+    }
+    
+    public Enseignant selectEnseignant(String email) {
+        Query q = em.createQuery("select u from Utilisateur u where u.email='"+email+"'");
+        if(!q.getResultList().isEmpty()) {
+            return (Enseignant)q.getResultList().get(0);
+        }
+        else {
+            return null;
+        }
     }
 
     public Enseignant selectEnseignant(String email, String pwd) {

@@ -20,20 +20,21 @@ function validateMdp2(mdp, mdpconfirm)
         // ici on ajoute un message d'erreur personnalisé, et du coup mdp2 devient invalide.  
         document.getElementById(mdpconfirm).setCustomValidity('Les mots de passes doivent être égaux.');
     }
-} 
+}
 
 function validateEmail(emailid, url)
 {
     var email = document.getElementById(emailid);
-    $.get(url+"?etape=verificationEmail&email="+ email.value, function(res, error)
+    $.get(url + "?etape=verificationEmail&email=" + email.value, function (res, error)
     {
-        if(!error && res == 200)
+        console.log("res status : " + error);
+        if (error == 'success')
         {
             document.getElementById(emailid).setCustomValidity('');
+            console.log("c'est valide je passe par là");
         }
-        else
-        {
-            document.getElementById(mdpconfirm).setCustomValidity("L'adresse email est déjà utilisée !");
-        }
+    }).error(function () {
+        document.getElementById(emailid).setCustomValidity("L'adresse email est déjà utilisée !");
+        console.log("c'est invalide je passe par là");
     });
 }

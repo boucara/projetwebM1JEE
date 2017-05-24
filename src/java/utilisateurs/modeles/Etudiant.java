@@ -8,6 +8,8 @@ package utilisateurs.modeles;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -19,6 +21,7 @@ public class Etudiant extends Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
     private String vilEtu;
     private boolean ancien;
+    @Temporal(TemporalType.DATE)
     private Date dateNaissance ;
     
     

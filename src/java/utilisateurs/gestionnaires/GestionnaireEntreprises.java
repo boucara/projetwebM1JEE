@@ -9,6 +9,7 @@ import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import utilisateurs.modeles.Entreprise;
 
 /**
@@ -34,6 +35,16 @@ public class GestionnaireEntreprises {
 
     public Entreprise selectEntreprise(String email, String pwd) {
         return null;
+    }
+    
+    public Entreprise selectEntreprise(String email) {
+        Query q = em.createQuery("select u from Utilisateur u where u.email='"+email+"'");
+        if(!q.getResultList().isEmpty()) {
+            return (Entreprise)q.getResultList().get(0);
+        }
+        else {
+            return null;
+        }
     }
 
     public Collection<Entreprise> selectEntreprises(int pagination) {

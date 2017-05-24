@@ -13,7 +13,7 @@
         <div class="form-group">
             <label class="control-label col-sm-5" for="email">Email :</label>
             <div class="col-sm-2"> 
-                <input class="form-control" title="exemple@exemple.com" placeholder="Entrer votre adresse mail" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" required type="mail" id="email" name="email"/>
+                <input class="form-control" onchange="validateEmail('email', 'Inscription')" title="exemple@exemple.com" placeholder="Entrer votre adresse mail" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" required type="mail" id="email" name="email"/>
             </div>
         </div> 
         <div class="form-group">

@@ -16,6 +16,7 @@ import utilisateurs.gestionnaires.GestionnaireEnseignants;
 import utilisateurs.gestionnaires.GestionnaireEntreprises;
 import utilisateurs.modeles.Enseignant;
 import utilisateurs.modeles.Entreprise;
+import utilisateurs.modeles.Etudiant;
 import utilisateurs.modeles.Utilisateur;
 
 /**
@@ -41,14 +42,23 @@ public class ServeltInscription extends MaServlet {
     @Override
     protected void processRequestGetDeco(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String etape = request.getParameter("etape");
         String fowardTo = "inscription.jsp";
-        String message = "Bienvenu dans la page d'inscription";
-        Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
-        if(user != null){
-            request.setAttribute("utilisateur", user);
+        if (etape != null && etape.equals("verificationEmail")) {
+            String email = request.getParameter("email");
+            if (gestionnaireEnseignants.selectEnseignant(email) != null || gestionnaireEntreprises.selectEntreprise(email) != null) {
+                response.setStatus(500);
+            }
+        } else {
+            String message = "Bienvenu dans la page d'inscription";
+            Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
+            if (user != null) {
+                request.setAttribute("utilisateur", user);
+            }
+            request.setAttribute("etape", "etape1");
+            request.setAttribute("message", message);
         }
-        request.setAttribute("etape", "etape1");
-        request.setAttribute("message", message);
+
         RequestDispatcher dp = request.getRequestDispatcher(fowardTo);
         dp.forward(request, response);
     }
@@ -84,25 +94,22 @@ public class ServeltInscription extends MaServlet {
                 request.getSession().setAttribute("connexion", true);
                 fowardTo = "Accueil";
             } else {
-                user = null;
+                user = new Etudiant(email, nom, prenom, mdp);
             }
             request.setAttribute("etape", "etape2");
             request.getSession().setAttribute("utilisateur", user);
-
         } else if (etape.equals("etape2")) {
             user = (Utilisateur) request.getSession().getAttribute("utilisateur");
             if (user.getClass().getName().equals("utilisateurs.modeles.Entreprise")) {
-                Entreprise entreprise = (Entreprise)user;
-                //gestionnaireEntreprises.insererEntreprise(entreprise);
+                Entreprise entreprise = (Entreprise) user;
+                gestionnaireEntreprises.insererEntreprise(entreprise);
             } else {
+                Etudiant etudiant = (Etudiant) user;
 
             }
             request.getSession().setAttribute("utilisateur", user);
             request.getSession().setAttribute("connexion", true);
             fowardTo = "Accueil";
-        }
-        else {
-            
         }
         request.setAttribute("message", message);
         RequestDispatcher dp = request.getRequestDispatcher(fowardTo);
