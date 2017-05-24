@@ -89,7 +89,7 @@ public class ServeltInscription extends MaServlet {
             request.setAttribute("etape", "etape2");
             request.getSession().setAttribute("utilisateur", user);
 
-        } else {
+        } else if (etape.equals("etape2")) {
             user = (Utilisateur) request.getSession().getAttribute("utilisateur");
             if (user.getClass().getName().equals("utilisateurs.modeles.Entreprise")) {
                 Entreprise entreprise = (Entreprise)user;
@@ -100,6 +100,9 @@ public class ServeltInscription extends MaServlet {
             request.getSession().setAttribute("utilisateur", user);
             request.getSession().setAttribute("connexion", true);
             fowardTo = "Accueil";
+        }
+        else {
+            
         }
         request.setAttribute("message", message);
         RequestDispatcher dp = request.getRequestDispatcher(fowardTo);
