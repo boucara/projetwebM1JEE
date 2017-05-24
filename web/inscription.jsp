@@ -5,6 +5,6 @@
 --%>
 
 <jsp:include page="template.jsp">  
-    <jsp:param name="content" value="home-Content"/>  
-    <jsp:param name="title" value="Page d'accueil"/>  
+    <jsp:param name="content" value="inscription-Content"/>  
+    <jsp:param name="title" value="Page d'inscription"/>  
 </jsp:include> 

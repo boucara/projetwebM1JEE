@@ -10,7 +10,6 @@ import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utilisateurs.gestionnaires.GestionnaireEnseignants;
@@ -24,7 +23,7 @@ import utilisateurs.modeles.Utilisateur;
  * @author Tom
  */
 @WebServlet(name = "ServeltInscription", urlPatterns = {"/Inscription"})
-public class ServeltInscription extends HttpServlet {
+public class ServeltInscription extends MaServlet {
 
     @EJB
     private GestionnaireEntreprises gestionnaireEntreprises;
@@ -39,10 +38,16 @@ public class ServeltInscription extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private void processRequestGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void processRequestGetDeco(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String fowardTo = "inscription.jsp";
         String message = "Bienvenu dans la page d'inscription";
+        Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
+        if(user != null){
+            request.setAttribute("utilisateur", user);
+        }
+        request.setAttribute("etape", "etape1");
         request.setAttribute("message", message);
         RequestDispatcher dp = request.getRequestDispatcher(fowardTo);
         dp.forward(request, response);
@@ -56,90 +61,62 @@ public class ServeltInscription extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequestPost(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void processRequestPostDeco(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String fowardTo = "inscription.jsp";
-        String message;
-        boolean testconnexion = (boolean) request.getSession().getAttribute("connexion");
+        String message = "Inscription en cours.";
         String etape = request.getParameter("etape");
-        if (testconnexion) {
-            message = "Utilisateur déjà connecté !";
-            request.setAttribute("utilisateur", request.getSession().getAttribute("utilisateur"));
-            fowardTo = "Accueil";
-        } else {
-            Utilisateur user;
-            if (etape.equals("etape1")) {
-                String mdp = request.getParameter("mdp");
-                String nom = request.getParameter("nom");
-                String prenom = request.getParameter("prenom");
-                String email = request.getParameter("email");
-                String categorie = request.getParameter("categorie");
-                if(categorie.equals("entreprise")){
-                    user = new Entreprise(nom, prenom, mdp, email);
-                }else if(categorie.equals("enseignant")){
-                    user = new Enseignant(nom, prenom, mdp, email);
-                }else{
-                    user = null;
-                }
-                message = "Deuxième étape de l'inscription";
-                request.getSession().setAttribute("utilisateur", user);
-            } else {
-                user = (Utilisateur) request.getSession().getAttribute("utilisateur");
-                if(user.getClass().getName().equals("utilisateurs.modeles.Enseignant")){
-                    gestionnaireEnseignants.insererEnseignant((Enseignant)user);
-                }else if(user.getClass().getName().equals("utilisateurs.modeles.Entreprise")){
-                    gestionnaireEntreprises.insererEntreprise((Entreprise)user);
-                }else{
-                    
-                }
-                request.setAttribute("utilisateur", user);
-                message = "Inscription terminée !";
+
+        Utilisateur user;
+        if (etape.equals("etape1")) {
+            message = "Deuxième étape de l'inscription";
+            String mdp = request.getParameter("mdp");
+            String nom = request.getParameter("nom");
+            String prenom = request.getParameter("prenom");
+            String email = request.getParameter("email");
+            String categorie = request.getParameter("categorie");
+            if (categorie.equals("entreprise")) {
+                user = new Entreprise(nom, prenom, mdp, email);
+            } else if (categorie.equals("enseignant")) {
+                user = new Enseignant(nom, prenom, mdp, email);
+                gestionnaireEnseignants.insererEnseignant((Enseignant) user);
+                request.getSession().setAttribute("connexion", true);
                 fowardTo = "Accueil";
+            } else {
+                user = null;
             }
+            request.setAttribute("etape", "etape2");
+            request.getSession().setAttribute("utilisateur", user);
 
+        } else {
+            user = (Utilisateur) request.getSession().getAttribute("utilisateur");
+            if (user.getClass().getName().equals("utilisateurs.modeles.Entreprise")) {
+                Entreprise entreprise = (Entreprise)user;
+                //gestionnaireEntreprises.insererEntreprise(entreprise);
+            } else {
+
+            }
+            request.getSession().setAttribute("utilisateur", user);
+            request.getSession().setAttribute("connexion", true);
+            fowardTo = "Accueil";
         }
-
         request.setAttribute("message", message);
         RequestDispatcher dp = request.getRequestDispatcher(fowardTo);
         dp.forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequestGet(request, response);
+    protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String fowardTo = "Accueil";
+        RequestDispatcher dp = request.getRequestDispatcher(fowardTo);
+        dp.forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequestPost(request, response);
+    protected void processRequestPostCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String fowardTo = "Accueil";
+        RequestDispatcher dp = request.getRequestDispatcher(fowardTo);
+        dp.forward(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 }

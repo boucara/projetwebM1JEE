@@ -21,12 +21,12 @@ public abstract class Utilisateur implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private String nom;
-    private String prenom;
+    protected int id;
+    protected String nom;
+    protected String prenom;
+    protected String mdp;
     @Column(unique=true)
-    private String mdp;
-    private String email;
+    protected String email;
     /**
      * Get the value of prenom
      *
