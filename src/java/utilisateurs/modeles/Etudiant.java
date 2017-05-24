@@ -14,7 +14,20 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Etudiant extends Utilisateur implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
+    public Etudiant() {
+
+    }
+
+    public Etudiant(String email, String nom, String prenom, String mdp) {
+        setEmail(email);
+        setMdp(mdp);
+        setNom(nom);
+        setPrenom(prenom);
+
+    }
 
     @Override
     public int hashCode() {
@@ -40,5 +53,5 @@ public class Etudiant extends Utilisateur implements Serializable {
     public String toString() {
         return "utilisateurs.modeles.Etudiants[ id=" + getId() + " ]";
     }
-    
+
 }
