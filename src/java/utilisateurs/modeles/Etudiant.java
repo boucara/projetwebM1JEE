@@ -6,6 +6,7 @@
 package utilisateurs.modeles;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 
 /**
@@ -16,6 +17,12 @@ import javax.persistence.Entity;
 public class Etudiant extends Utilisateur implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    private String vilEtu;
+    private boolean ancien;
+    private Date dateNaissance ;
+    
+    
+    
 
     public Etudiant() {
 
@@ -47,6 +54,27 @@ public class Etudiant extends Utilisateur implements Serializable {
             return false;
         }
         return true;
+    }
+    public String getVilleEtu(){
+        return vilEtu ;
+        
+    }
+    public void setVilleEtu(String vilEtu){
+        this.vilEtu=vilEtu;
+    }
+    public boolean getAcien(){
+        return ancien;
+        
+    }
+    public void setAncien(boolean ancien){
+        this.ancien=ancien;
+    }
+    public Date getDateNaissance(){
+        return dateNaissance;
+    }
+    public void setDateNaissance(Date dateNaissance){
+        this.dateNaissance= dateNaissance;
+        
     }
 
     @Override
