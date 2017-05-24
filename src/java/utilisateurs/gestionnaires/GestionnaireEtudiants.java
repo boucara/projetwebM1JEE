@@ -5,9 +5,13 @@
  */
 package utilisateurs.gestionnaires;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import utilisateurs.modeles.Etudiant;
 
 /**
  *
@@ -16,7 +20,42 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class GestionnaireEtudiants {
 
-    @PersistenceContext  
+    @PersistenceContext
     private EntityManager em;
+
+    public Etudiant creeEtudiant(String email, String nom, String prenom, String mdp) {
+
+        Etudiant e = new Etudiant(email, nom, prenom, mdp);
+
+        em.persist(e);
+        return e;
+    }
+
+    public void ajouterUtilisateur(String email, String nom, String prenom, String mdp) {
+        Etudiant e = creeEtudiant(email, nom, prenom, mdp);
+    }
+
+    public void modifEtudiant(String nom, String prenom, String login, String mdp) {
+
+        Query q = em.createQuery("update Etudiant e set e.nom= :nom  , e.prenom=:prenom ,e.email=:email  , e.mdp=:mdp  where  e.email=:email ");
+        q.setParameter("nom", nom);
+        q.setParameter("prenom", prenom);
+        q.setParameter("login", login);
+        q.setParameter("mdp", mdp);
+        int numUpdates = q.executeUpdate();
+    }
+    public void deleteEtudiant (String email ,String nom, String prenom, String mdp){
+        Query q= em.createQuery("delete from Etudiant e where e.email=:email  "); 
+            q.setParameter("email", email);
+            int numUpdates = q.executeUpdate();
+        
+    }
+    
+
+    public Collection<Etudiant> getAllUsers() {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select e from Etudiant e");
+        return q.getResultList();
+    }
 
 }
