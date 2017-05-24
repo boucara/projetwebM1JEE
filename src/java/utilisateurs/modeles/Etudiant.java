@@ -7,7 +7,10 @@ package utilisateurs.modeles;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -22,10 +25,10 @@ public class Etudiant extends Utilisateur implements Serializable {
     private String vilEtu;
     private boolean ancien;
     @Temporal(TemporalType.DATE)
-    private Date dateNaissance ;
-    
-    
-    
+    private Date dateNaissance;
+@Lob
+    @Basic(fetch = FetchType.EAGER)
+    private byte[] image;
 
     public Etudiant() {
 
@@ -58,26 +61,40 @@ public class Etudiant extends Utilisateur implements Serializable {
         }
         return true;
     }
-    public String getVilleEtu(){
-        return vilEtu ;
-        
+
+    public String getVilleEtu() {
+        return vilEtu;
+
     }
-    public void setVilleEtu(String vilEtu){
-        this.vilEtu=vilEtu;
+
+    public void setVilleEtu(String vilEtu) {
+        this.vilEtu = vilEtu;
     }
-    public boolean getAcien(){
+
+    public boolean getAcien() {
         return ancien;
-        
+
     }
-    public void setAncien(boolean ancien){
-        this.ancien=ancien;
+
+    public void setAncien(boolean ancien) {
+        this.ancien = ancien;
     }
-    public Date getDateNaissance(){
+
+    public Date getDateNaissance() {
         return dateNaissance;
     }
-    public void setDateNaissance(Date dateNaissance){
-        this.dateNaissance= dateNaissance;
-        
+
+    public void setDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
+
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override
