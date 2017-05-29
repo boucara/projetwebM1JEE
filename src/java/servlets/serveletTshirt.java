@@ -7,23 +7,19 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utilisateurs.gestionnaires.GestionnaireUtilisateur;
-import utilisateurs.modeles.Utilisateur;
 
 /**
  *
  * @author Aicha
  */
-@WebServlet(name = "ServeletConnexion", urlPatterns = {"/ServeletConnexion"})
-public class ServeletConnexion extends HttpServlet {
-     @EJB
-    private GestionnaireUtilisateur gestionnaireUtilisateur;
+@WebServlet(name = "serveletTshirt", urlPatterns = {"/Tshirt"})
+public class serveletTshirt extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,30 +32,11 @@ public class ServeletConnexion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String action = request.getParameter("action");  
-        String forwardTo = "home.jsp";  
-        String message = "en attente de connexion";
-       
-        Utilisateur user = (Utilisateur)request.getSession().getAttribute("user");
-        if (action != null) { 
-            if (action.equals("seConnecter")) {
-                String mail = request.getParameter("mail");
-                String mdp = request.getParameter("mdp");
-                Utilisateur utilisateur = gestionnaireUtilisateur.getUser(mail, mdp);
-                if(utilisateur!= null)
-                {
-                    request.getSession().setAttribute("user", utilisateur);
-                    message = "Utilisateur connecté";
-                    user = utilisateur;
-                }
-                else
-                {
-                    message = "Mot de passe ou mail incorrect";
-                }
-                forwardTo = "home.jsp?action=Connexion";
-            }
-        }
-        
+        response.setContentType("text/html;charset=UTF-8");
+        String para = request.getParameter("para");
+        String fowardTo = "tshirt.jsp";
+        RequestDispatcher dp = request.getRequestDispatcher(fowardTo);
+        dp.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
