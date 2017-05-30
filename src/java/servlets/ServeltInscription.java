@@ -6,7 +6,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.text.ParseException;
 import javax.ejb.EJB;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +21,9 @@ import utilisateurs.modeles.Enseignant;
 import utilisateurs.modeles.Entreprise;
 import utilisateurs.modeles.Etudiant;
 import utilisateurs.modeles.Utilisateur;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -109,10 +114,25 @@ public class ServeltInscription extends MaServlet {
             user = (Utilisateur) request.getSession().getAttribute("utilisateur");
             if (user.getClass().getName().equals("utilisateurs.modeles.Entreprise")) {
                 Entreprise entreprise = (Entreprise) user;
+                entreprise.setFonction(request.getParameter("function"));
+                entreprise.setTel(request.getParameter("tel"));
+                entreprise.setNomEntreprise(request.getParameter("nomEntreprise"));
+                entreprise.setSecteurActiviteEntreprise(request.getParameter("secteurActivite"));
                 gestionnaireEntreprises.insererEntreprise(entreprise);
                 request.getSession().setAttribute("utilisateur", entreprise);
             } else {
                 Etudiant etudiant = (Etudiant) user;
+                etudiant.setAncien(request.getParameter("ancien") != null);
+                etudiant.setVilleEtu(request.getParameter("miage"));
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+                Date date;
+                try {
+                    date = formatter.parse(request.getParameter("date"));
+                    etudiant.setDateNaissance(date);
+                } catch (ParseException ex) {
+                    Logger.getLogger(ServeltInscription.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                etudiant.setImage(request.getParameter("photo").getBytes());
                 gestionnaireEtudiants.insererEtudiant(etudiant);
                 request.getSession().setAttribute("utilisateur", etudiant);
             }

@@ -169,7 +169,7 @@
             <div class="form-group">
                 <label class="control-label col-sm-4" for="photo">Photo de profil : </label>
                 <div class="col-sm-2">
-                    <input class="form-control" type="file" placeholder="Selectionner une photo de profil" id="photo" required/>
+                    <input class="form-control" type="file" onchange="loadProfilePic(this)" id="photo" required/>
                 </div>
             </div>
             <div class="form-group">
@@ -180,7 +180,7 @@
                 <script>
                     loadProfilePic = function (e) {
                         // on récupère le canvas où on affichera l'image  
-                        var canvas = document.getElementById("profilepic");
+                        var canvas = document.getElementById("preview");
                         var ctx = canvas.getContext("2d");
                         // on réinitialise le canvas: on l'efface, et déclare sa largeur et hauteur à 0  
                         ctx.fillStyle = "white";
@@ -242,11 +242,10 @@
                                 // on donne finalement cette dataurl comme valeur au champs profilepic  
                                 document.getElementById("profilepic").value = dataurl;
                             }
-                            ;
-                        }
+                        };
                         // on charge l'image pour de vrai, lorsque ce sera terminé le callback loadProfilePic sera appelé.  
                         reader.readAsDataURL(file);
-                    }
+                    };
                 </script>
             </div>
 
