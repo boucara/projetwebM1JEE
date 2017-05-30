@@ -91,6 +91,8 @@ public class ServeltInscription extends MaServlet {
             String categorie = request.getParameter("categorie");
             if (categorie.equals("entreprise")) {
                 user = new Entreprise(nom, prenom, mdp, email);
+                request.getSession().setAttribute("categorie", "entreprise");
+                request.setAttribute("categorie", "entreprise");
             } else if (categorie.equals("enseignant")) {
                 user = new Enseignant(nom, prenom, mdp, email);
                 gestionnaireEnseignants.insererEnseignant((Enseignant) user);
@@ -98,6 +100,8 @@ public class ServeltInscription extends MaServlet {
                 fowardTo = "Accueil";
             } else {
                 user = new Etudiant(email, nom, prenom, mdp);
+                request.getSession().setAttribute("categorie", "etudiant");
+                request.setAttribute("categorie", "etudiant");
             }
             request.setAttribute("etape", "etape2");
             request.getSession().setAttribute("utilisateur", user);
