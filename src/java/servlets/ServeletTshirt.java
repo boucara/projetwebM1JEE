@@ -47,7 +47,8 @@ public class ServeletTshirt extends HttpServlet {
             if (action.equals("creerTshirtconcour")) {
                 gestionnaireTshirt.creerTshirtconcour();
 
-                
+                Collection<Tshirt> listshirt = gestionnaireTshirt.getTshirtConcour();
+                request.setAttribute("concour",listshirt );
 
                 forwardTo = "tshirt.jsp?action=creerTshirtconcour";
                 message = "Concour Tshirt";
