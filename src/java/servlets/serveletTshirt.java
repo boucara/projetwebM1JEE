@@ -7,12 +7,17 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utilisateurs.gestionnaires.GestionnaireTshirt;
+import utilisateurs.modeles.Tshirt;
+
 
 /**
  *
@@ -20,7 +25,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "serveletTshirt", urlPatterns = {"/Tshirt"})
 public class serveletTshirt extends HttpServlet {
-
+    
+@EJB
+    private GestionnaireTshirt gestionnaireTshirt;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,10 +41,22 @@ public class serveletTshirt extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String para = request.getParameter("para");
-        String fowardTo = "tshirt.jsp";
-        RequestDispatcher dp = request.getRequestDispatcher(fowardTo);
-        dp.forward(request, response);
+        String action= request.getParameter("action");
+        String forwardTo = "tshirt.jsp";
+        String message="salut";
+       
+        
+        
+        if (action != null) {  
+            if (action.equals("creerTshirtconcour" )) {  
+                gestionnaireTshirt.creerTshirtconcour();  
+                  
+            
+                Collection<Tshirt> listshirt = gestionnaireTshirt.getTshirtConcour();  
+              
+                forwardTo = "pagejsp.jsp?action=listshirt";  
+                message = "Concour Tshirt";  
+            } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -78,4 +98,5 @@ public class serveletTshirt extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    }
 }
