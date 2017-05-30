@@ -23,16 +23,9 @@ public class GestionnaireEtudiants {
     @PersistenceContext
     private EntityManager em;
 
-    public Etudiant creeEtudiant(String email, String nom, String prenom, String mdp) {
-
-        Etudiant e = new Etudiant(email, nom, prenom, mdp);
-
+    public Etudiant insererEtudiant(Etudiant e) {
         em.persist(e);
         return e;
-    }
-
-    public void ajouterUtilisateur(String email, String nom, String prenom, String mdp) {
-        Etudiant e = creeEtudiant(email, nom, prenom, mdp);
     }
 
     public void modifEtudiant(String nom, String prenom, String login, String mdp) {

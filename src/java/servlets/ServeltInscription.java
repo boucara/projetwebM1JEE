@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utilisateurs.gestionnaires.GestionnaireEnseignants;
 import utilisateurs.gestionnaires.GestionnaireEntreprises;
+import utilisateurs.gestionnaires.GestionnaireEtudiants;
 import utilisateurs.modeles.Enseignant;
 import utilisateurs.modeles.Entreprise;
 import utilisateurs.modeles.Etudiant;
@@ -30,6 +31,8 @@ public class ServeltInscription extends MaServlet {
     private GestionnaireEntreprises gestionnaireEntreprises;
     @EJB
     private GestionnaireEnseignants gestionnaireEnseignants;
+    @EJB
+    private GestionnaireEtudiants gestionnaireEtudiants;
 
     /**
      * Processes requests for both HTTP <code>Get</code> methods.
@@ -103,11 +106,12 @@ public class ServeltInscription extends MaServlet {
             if (user.getClass().getName().equals("utilisateurs.modeles.Entreprise")) {
                 Entreprise entreprise = (Entreprise) user;
                 gestionnaireEntreprises.insererEntreprise(entreprise);
+                request.getSession().setAttribute("utilisateur", entreprise);
             } else {
                 Etudiant etudiant = (Etudiant) user;
-
+                gestionnaireEtudiants.insererEtudiant(etudiant);
+                request.getSession().setAttribute("utilisateur", etudiant);
             }
-            request.getSession().setAttribute("utilisateur", user);
             request.getSession().setAttribute("connexion", true);
             fowardTo = "Accueil";
         }
