@@ -49,7 +49,7 @@ public class serveletTshirt extends HttpServlet {
 
                 Collection<Tshirt> listshirt = gestionnaireTshirt.getTshirtConcour();
 
-                forwardTo = "pagejsp.jsp?action=listshirt";
+                forwardTo = "tshirt.jsp?action=creerTshirtconcour";
                 message = "Concour Tshirt";
             }
         }
