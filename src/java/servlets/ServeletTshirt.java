@@ -22,7 +22,7 @@ import utilisateurs.modeles.Tshirt;
  * @author Aicha
  */
 @WebServlet(name = "serveletTshirt", urlPatterns = {"/Tshirt"})
-public class serveletTshirt extends HttpServlet {
+public class ServeletTshirt extends HttpServlet {
 
     @EJB
     private GestionnaireTshirt gestionnaireTshirt;
@@ -47,7 +47,7 @@ public class serveletTshirt extends HttpServlet {
             if (action.equals("creerTshirtconcour")) {
                 gestionnaireTshirt.creerTshirtconcour();
 
-                Collection<Tshirt> listshirt = gestionnaireTshirt.getTshirtConcour();
+                
 
                 forwardTo = "tshirt.jsp?action=creerTshirtconcour";
                 message = "Concour Tshirt";
