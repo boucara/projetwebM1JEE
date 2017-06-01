@@ -11,7 +11,7 @@ import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utilisateurs.gestionnaires.GestionnaireTshirt;
@@ -22,7 +22,7 @@ import utilisateurs.modeles.Tshirt;
  * @author Aicha
  */
 @WebServlet(name = "serveletTshirt", urlPatterns = {"/Tshirt"})
-public class ServeletTshirt extends HttpServlet {
+public class ServeletTshirt extends MaServlet {
 
     @EJB
     private GestionnaireTshirt gestionnaireTshirt;
@@ -36,9 +36,8 @@ public class ServeletTshirt extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+    @Override
+    protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         String forwardTo = "tshirt.jsp";
         String message = "salut";
@@ -48,14 +47,27 @@ public class ServeletTshirt extends HttpServlet {
                 gestionnaireTshirt.creerTshirtconcour();
 
                 Collection<Tshirt> listshirt = gestionnaireTshirt.getTshirtConcour();
-                request.setAttribute("concour",listshirt );
+                request.setAttribute("concour", listshirt);
 
                 forwardTo = "tshirt.jsp?action=creerTshirtconcour";
                 message = "Concour Tshirt";
             }
         }
 
-        
+    }
 
+    @Override
+    protected void processRequestPostCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void processRequestGetDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void processRequestPostDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
