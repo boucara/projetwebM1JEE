@@ -37,7 +37,7 @@
 
                             <ul class="dropdown-menu">
                                 <li><a href="#">Concours Vidéos</a></li>
-                                <li><a href="Tshirt">Concours T-Shirt</a></li>
+                                <li><a href="Tshirt?action=creerTshirtconcour">Concours T-Shirt</a></li>
                                 <li><a href="#">Trombinoscope</a></li> 
                                 <li><a href="#">Resultats Votes</a></li> 
                                 <li><a href="#">Packs</a></li>  

@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import java.util.Collection;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utilisateurs.gestionnaires.GestionnaireTshirt;
 import utilisateurs.modeles.Tshirt;
+import utilisateurs.modeles.Utilisateur;
 
 /**
  *
@@ -51,9 +53,14 @@ public class ServeletTshirt extends MaServlet {
 
                 forwardTo = "tshirt.jsp?action=creerTshirtconcour";
                 message = "Concour Tshirt";
+                System.out.println(forwardTo);
             }
         }
-
+        Utilisateur user = (Utilisateur)request.getSession().getAttribute("utilisateur");
+        request.setAttribute("utilisateur", user);
+        request.setAttribute("connexion", true);
+        RequestDispatcher dp = request.getRequestDispatcher(forwardTo);  
+        dp.forward(request, response);
     }
 
     @Override
