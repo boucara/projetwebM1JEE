@@ -18,20 +18,33 @@
         <div class="form-group">
             <label class="control-label col-sm-4" for="email">Email :</label>
             <div class="col-sm-4"> 
-                <input class="form-control" onchange="validateEmail('email', 'Inscription')" title="exemple@exemple.com" placeholder="Entrer votre adresse mail" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" required type="mail" id="email" name="email"/>
+                <input class="form-control" onchange="validateEmail('email', 'Inscription')" title="exemple@exemple.com" placeholder="Entrer votre adresse mail" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}" required type="mail" id="email" name="email" 
+                       <c:if test="${requestScope['utilisateur'] != null}">
+                           value="${requestScope['utilisateur'].email}"
+                       </c:if>/>
             </div>
         </div> <br/>
 
         <!--Gestion du nom de l'utilisateur-->
         <div class="form-group">
             <label class="control-label col-sm-4" for="nom">Nom : </label>
-            <div class="col-sm-4"><input class="form-control" placeholder="Entrez votre nom" required type="text" id="nom" name="nom"/></div>
+            <div class="col-sm-4">
+                <input class="form-control" placeholder="Entrez votre nom" required type="text" id="nom" name="nom"
+                       <c:if test="${requestScope['utilisateur'] != null}">
+                           value="${requestScope['utilisateur'].nom}"
+                       </c:if>/>
+            </div>
         </div> <br/>
 
         <!--Gestion du prenom de l'utilisateur-->
         <div class="form-group">
             <label class="control-label col-sm-4" for="prenom">Prénom :</label>
-            <div class="col-sm-4"> <input class="form-control" placeholder="Entrez votre prénom" required type="text" id="prenom" name="prenom"/></div>
+            <div class="col-sm-4">
+                <input class="form-control" placeholder="Entrez votre prénom" required type="text" id="prenom" name="prenom"
+                       <c:if test="${requestScope['utilisateur'] != null}">
+                           value="${requestScope['utilisateur'].prenom}"
+                       </c:if>/>
+            </div>
         </div><br/>
 
         <!--Gestion du mdp passe de l'utilisateur-->
