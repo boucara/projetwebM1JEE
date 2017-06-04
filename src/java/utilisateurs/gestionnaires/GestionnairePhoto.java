@@ -25,7 +25,7 @@ import utilisateurs.modeles.Photo;
 @Stateless
 public class GestionnairePhoto {
 
-    private final String répertoire = "../Archivage";
+    private final String répertoire = "../../../../web/resources/images";
     @PersistenceContext
     EntityManager persistance;
 

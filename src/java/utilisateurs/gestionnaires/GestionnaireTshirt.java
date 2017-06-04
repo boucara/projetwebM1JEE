@@ -22,6 +22,7 @@ public class GestionnaireTshirt {
 
     @PersistenceContext
     private EntityManager em;
+    GestionnairePhoto gestionnairePhoto;
 
     public Tshirt creerTshirt(String miage, String pays, Photo img) {
         Tshirt t = new Tshirt(miage, pays, img);

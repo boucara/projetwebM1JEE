@@ -11,11 +11,10 @@
         <div>${t.miage}</div> 
         <div>${t.pays}</div> 
         <div>${t.img}</div>
-        
-        
+
     </c:forEach>
     <form action="ServeletTshirt" method="get">  
         <input type="button" value="partiConcour" name="button" class="btn btn-default" />  
     </form>
-    </c:if> 
+</c:if> 
 

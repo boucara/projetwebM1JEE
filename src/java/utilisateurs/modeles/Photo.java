@@ -95,6 +95,12 @@ public class Photo implements Serializable {
         largeur = image.getWidth();
         hauteur = image.getHeight();
     }
+    public String getNom(){
+        return nom;
+    }
+    public void setNom(String nom){
+        this.nom=nom;
+    }
 
     @Override
     public String toString() {
