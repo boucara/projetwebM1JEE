@@ -26,7 +26,7 @@ import utilisateurs.modeles.Photo;
 public class GestionnairePhoto {
 
     private final String répertoire = "../Archivage";
-    @PersistenceContext(unitName = "Photos-ejbPU") // s'il existe une seule unité de persistance, la désignation de son nom n'est pas obligatoire
+    @PersistenceContext
     EntityManager persistance;
 
     public void stocker(String nom, byte[] octets) throws IOException {

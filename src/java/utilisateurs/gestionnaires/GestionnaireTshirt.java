@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import utilisateurs.modeles.Photo;
 import utilisateurs.modeles.Tshirt;
 
 /**
@@ -22,20 +23,17 @@ public class GestionnaireTshirt {
     @PersistenceContext
     private EntityManager em;
 
-    public Tshirt creerTshirt(String miage, String pays, byte[] image) {
-        Tshirt t = new Tshirt(miage, pays, image);
+    public Tshirt creerTshirt(String miage, String pays, Photo img) {
+        Tshirt t = new Tshirt(miage, pays, img);
         em.persist(t);
         return t;
 
     }
 
     public void creerTshirtconcour() {
-        byte[] imageBytes = {0x32, 0x32, 0x32, 0x32, 0x32,
-            0x32, 0x32, 0x32,
-            0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32,
-            0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32, 0x32
-        };
-        creerTshirt("Nice", "Chine", imageBytes);
+        Photo img = new Photo("../../../../web/resources/images/drapeau-chine",204080);
+
+        creerTshirt("Nice", "Chine", img);
     }
 
     public Collection<Tshirt> getTshirtConcour() {
