@@ -6,11 +6,15 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Collection;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utilisateurs.gestionnaires.GestionnaireEvent;
+import utilisateurs.modeles.Event;
 import utilisateurs.modeles.Utilisateur;
 
 /**
@@ -19,7 +23,9 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "ServletHome", urlPatterns = {"/Accueil"})
 public class ServletHome extends MaServlet {
-
+    @EJB
+    private GestionnaireEvent gestionnaireEvents;    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,36 +36,48 @@ public class ServletHome extends MaServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
-        Utilisateur user = (Utilisateur)request.getSession().getAttribute("utilisateur");
+    protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
         request.setAttribute("utilisateur", user);
         request.setAttribute("connexion", true);
-        request.setAttribute("message", "Hello "+user.getPrenom());
-        RequestDispatcher dp = request.getRequestDispatcher("home.jsp");  
+        request.setAttribute("message", "Hello " + user.getPrenom());
+        request.setAttribute("events", getEvents(request));
+        RequestDispatcher dp = request.getRequestDispatcher("home.jsp");
         dp.forward(request, response);
     }
 
     @Override
     protected void processRequestPostCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Utilisateur user = (Utilisateur)request.getSession().getAttribute("utilisateur");
+        Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
         request.setAttribute("utilisateur", user);
         request.setAttribute("connexion", true);
-        request.setAttribute("message", "Hello "+user.getPrenom());
-        RequestDispatcher dp = request.getRequestDispatcher("home.jsp");  
+        request.setAttribute("message", "Hello " + user.getPrenom());
+        request.setAttribute("events", getEvents(request));
+        RequestDispatcher dp = request.getRequestDispatcher("home.jsp");
         dp.forward(request, response);
     }
 
     @Override
     protected void processRequestGetDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("message", "Hello World");
-        RequestDispatcher dp = request.getRequestDispatcher("home.jsp");  
+        request.setAttribute("events", getEvents(request));
+        RequestDispatcher dp = request.getRequestDispatcher("home.jsp");
         dp.forward(request, response);
     }
 
     @Override
     protected void processRequestPostDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("message", "Hello World");
-        RequestDispatcher dp = request.getRequestDispatcher("home.jsp");  
+        request.setAttribute("events", getEvents(request));
+        RequestDispatcher dp = request.getRequestDispatcher("home.jsp");
         dp.forward(request, response);
+    }
+
+    private Collection<Event> getEvents(HttpServletRequest request) {
+        int pagination = 0;
+        if (request.getParameter("pagination") != null) {
+            pagination = Integer.parseInt(request.getParameter("pagination"));
+        }
+        return gestionnaireEvents.selectEvents(pagination);
     }
 }

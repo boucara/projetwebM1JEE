@@ -26,7 +26,7 @@ public class Etudiant extends Utilisateur implements Serializable {
     private boolean ancien;
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;
-@Lob
+    @Lob
     @Basic(fetch = FetchType.EAGER)
     private byte[] image;
 

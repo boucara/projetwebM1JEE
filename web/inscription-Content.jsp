@@ -137,7 +137,7 @@
                         dateFormat: 'yy-mm-dd',
                         yearRange: "c-100:c"
                     });
-                })
+                });
             }
         </script>
         <form class="form-horizontal" action="Inscription" method="post">  
