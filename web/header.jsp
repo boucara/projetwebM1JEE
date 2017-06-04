@@ -36,7 +36,7 @@
                                 <span class="caret"></span></a>
 
                             <ul class="dropdown-menu">
-                                <li><a href="#">Concours Vidéos</a></li>
+                                <li><a href="Video?action=concourVideo">Concours Vidéos</a></li>
                                 <li><a href="Tshirt?action=creerTshirtconcour">Concours T-Shirt</a></li>
                                 <li><a href="#">Trombinoscope</a></li> 
                                 <li><a href="#">Resultats Votes</a></li> 
