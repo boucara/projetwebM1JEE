@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : Tom
 */
 .header{
-    
+
 }
 
 .main{
@@ -28,7 +28,7 @@ and open the template in the editor.
     margin-top : 200px
 }
 
- /* Add a dark background color with a little bit see-through */
+/* Add a dark background color with a little bit see-through */
 .navbar {
     margin-bottom: 0;
     background-color: #C72C48;
@@ -36,7 +36,7 @@ and open the template in the editor.
     font-size: 11px ;
     letter-spacing: 4px;
     opacity:0.9;
-  
+
 }
 
 /* Add a gray color to all navbar links */
@@ -92,3 +92,16 @@ footer a:hover {
     color: #777;
     text-decoration: none;
 }
+
+ 
+
+#sidbar {
+    background-color:#C72C48 ;
+    height: 100%;
+    width :70%
+}
+#contenuVideo{
+    height: 100%;
+    width :30%
+}
+
