@@ -92,19 +92,26 @@ footer a:hover {
     color: #777;
     text-decoration: none;
 }
-#param{
-    color: #C72C48;
+#para{
+    color:#777;
 }
 
  
-
+#content{
+  margin:0;
+  padding:0;
+  background: url(images/back-img.jpg) no-repeat center fixed; 
+  -webkit-background-size: cover; 
+  background-size: cover; 
+}
 #sidbar {
-    background-color:#C72C48 ;
+    
     height: 100%;
-    width :70%
+    width :50%
 }
 #contenuVideo{
+    
     height: 100%;
-    width :30%
+    width :50%
 }
 

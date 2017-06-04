@@ -6,5 +6,5 @@
 
 <jsp:include page="template.jsp">  
     <jsp:param name="content" value="concourVideo-content"/>  
-    <jsp:param name="title" value="video"/>  
+    <jsp:param name="title" value="Concours video"/>  
 </jsp:include> 
