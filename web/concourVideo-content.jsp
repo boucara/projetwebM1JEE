@@ -5,12 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <c:if test="${param['action'] == 'concourVideo'}">
     <h3> Bienvenue! sur la page du concour vidéo </h3>
     <div class="container-fluid" >
         <div class="row content"id ="content">
             <div class="col-sm-3 sidenav" id ="sidbar">
-                <p> Thème : Etudiants à l’étranger dans le cadre d’un échange Erasmus.C’est le moment de parler du concours vidéo. 
+                <p id="para"> Thème : Etudiants à l’étranger dans le cadre d’un échange Erasmus.C’est le moment de parler du concours vidéo. 
                     Il est grand temps pour vous de nous réaliser des vidéos dignes de ce nom.
                     Pour avoir la chance de remporter cette édition, vous devez respecter les contraintes suivantes :
                 </p>
@@ -57,6 +58,14 @@
             </div>
             <div class="col-sm-9" id ="contenuVideo">
                 Ceci est la place de la video
+                <object type="application/x-shockwave-flash" width="425" height="355" data="http://www.youtube.com/v/EuFUPUHQnLY&feature;h1=fr">
+
+                    <param name="movie" value="http://www.youtube.com/v/EuFUPUHQnLY&feature;h1=fr" />
+
+
+                    <param name="wmode" value="transparent" />
+
+                </object>
             </div>
         </div>
     </div>
