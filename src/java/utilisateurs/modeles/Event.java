@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -34,6 +35,16 @@ public class Event implements Serializable {
     @Lob
     @Basic(fetch = FetchType.EAGER)
     private byte[] photo;
+    @Transient
+    private String urlphoto;
+
+    public String getUrlphoto() {
+        return urlphoto;
+    }
+
+    public void setUrlphoto(String urlphoto) {
+        this.urlphoto = urlphoto;
+    }
 
     public Event() {
     }
