@@ -32,7 +32,7 @@ public class GestionnaireTshirt {
     }
 
     public void creerTshirtconcour() {
-        Photo img = new Photo("../../../../web/resources/images/drapeau-chine",204080);
+        Photo img = new Photo("../../../../web/resources/images/drapeau-chine", 204080);
 
         creerTshirt("Nice", "Chine", img);
     }
