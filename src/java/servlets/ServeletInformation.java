@@ -24,6 +24,16 @@ public class ServeletInformation extends MaServlet {
 
     @Override
     protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+    }
+
+    @Override
+    protected void processRequestPostCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+    }
+
+    @Override
+    protected void processRequestGetDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         String forwardTo = "information.jsp";
         String message = "";
@@ -39,21 +49,12 @@ public class ServeletInformation extends MaServlet {
         
         RequestDispatcher dp = request.getRequestDispatcher(forwardTo);  
         dp.forward(request, response);
-    }
-
-    @Override
-    protected void processRequestPostCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    protected void processRequestGetDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     protected void processRequestPostDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
 }

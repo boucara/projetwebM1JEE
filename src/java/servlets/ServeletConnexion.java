@@ -29,11 +29,20 @@ public class ServeletConnexion extends MaServlet {
 
     @Override
     protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void processRequestPostCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void processRequestGetDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         String forwardTo = "home.jsp";
         String message = "en attente de connexion";
 
-        
         if (action != null) {
             Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
             if (action.equals("seConnecter")) {
@@ -52,22 +61,10 @@ public class ServeletConnexion extends MaServlet {
                 forwardTo = "home.jsp?action=seConnecter";
             }
         }
-
         
-        request.setAttribute("connexion", true);
         RequestDispatcher dp = request.getRequestDispatcher(forwardTo);
         dp.forward(request, response);
 
-    }
-
-    @Override
-    protected void processRequestPostCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-    }
-
-    @Override
-    protected void processRequestGetDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
