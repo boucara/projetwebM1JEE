@@ -12,7 +12,7 @@ function validateMdp2(mdp, mdpconfirm)
     var re = /^[a-z0-9A-Z]{6,20}/;
     if (re.exec(password.value) && password.value == password2.value)
     {
-        // ici on supprime le message d'erreur personnalisé, et du coup mdp2 devient valide.  
+        // ici on supprime le message d'erreur personnalisé, et du coup mdp2 devient valide.
         document.getElementById(mdpconfirm).setCustomValidity('');
     }
     else
@@ -27,14 +27,11 @@ function validateEmail(emailid, url)
     var email = document.getElementById(emailid);
     $.get(url + "?etape=verificationEmail&email=" + email.value, function (res, error)
     {
-        console.log("res status : " + error);
         if (error == 'success')
         {
             document.getElementById(emailid).setCustomValidity('');
-            console.log("c'est valide je passe par là");
         }
     }).error(function () {
         document.getElementById(emailid).setCustomValidity("L'adresse email est déjà utilisée !");
-        console.log("c'est invalide je passe par là");
     });
 }

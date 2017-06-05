@@ -54,7 +54,7 @@ public class ServeltInscription extends MaServlet {
         String fowardTo = "inscription.jsp";
         if (etape != null && etape.equals("verificationEmail")) {
             String email = request.getParameter("email");
-            if (gestionnaireEnseignants.selectEnseignant(email) != null || gestionnaireEntreprises.selectEntreprise(email) != null) {
+            if (gestionnaireEnseignants.selectEnseignant(email) != null || gestionnaireEntreprises.selectEntreprise(email) != null || gestionnaireEtudiants.selectEtudiant(email) != null) {
                 response.setStatus(500);
             }
         } else {

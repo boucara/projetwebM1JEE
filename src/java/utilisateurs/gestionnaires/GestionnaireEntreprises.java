@@ -34,11 +34,17 @@ public class GestionnaireEntreprises {
     }
 
     public Entreprise selectEntreprise(String email, String pwd) {
-        return null;
+        Query q = em.createQuery("select e from Entreprise e where e.email='"+email+"' and e.mdp='"+pwd+"'");
+        if(!q.getResultList().isEmpty()) {
+            return (Entreprise)q.getResultList().get(0);
+        }
+        else {
+            return null;
+        }
     }
     
     public Entreprise selectEntreprise(String email) {
-        Query q = em.createQuery("select u from Utilisateur u where u.email='"+email+"'");
+        Query q = em.createQuery("select e from Entreprise e where e.email='"+email+"'");
         if(!q.getResultList().isEmpty()) {
             return (Entreprise)q.getResultList().get(0);
         }

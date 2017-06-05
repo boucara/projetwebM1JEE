@@ -27,6 +27,26 @@ public class GestionnaireEtudiants {
         em.persist(e);
         return e;
     }
+    
+    public Etudiant selectEtudiant(String email) {
+        Query q = em.createQuery("select e from Etudiant e where e.email='"+email+"'");
+        if(!q.getResultList().isEmpty()) {
+            return (Etudiant)q.getResultList().get(0);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    public Etudiant selectEtudiant(String email, String mdp) {
+        Query q = em.createQuery("select e from Etudiant e where e.email='"+email+"' and e.mdp='"+mdp+"'");
+        if(!q.getResultList().isEmpty()) {
+            return (Etudiant)q.getResultList().get(0);
+        }
+        else {
+            return null;
+        }
+    }
 
     public void modifEtudiant(String nom, String prenom, String login, String mdp) {
 
