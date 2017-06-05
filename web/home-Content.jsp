@@ -8,14 +8,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 
 <div>
-    <c:forEach  var="e" items="${requestScope['events']}">
-        <div>
-            <div>${e.nom}</div> 
-            <div><img src="${e.photo}"/></div> 
-            <div>${e.description}</div> 
-            <div>${e.datePublication}</div>
-        </div>
-    </c:forEach>
+    <c:if test="${param['action'] == 'seConnecter'}">
+        <h1>hello connexion reussi </h1>
+
+    </c:if>
+    <c:if test="${param['action'] != 'seConnecter'}">
+        <c:forEach  var="e" items="${requestScope['events']}">
+            <div>
+                <div>${e.nom}</div> 
+                <div><img src="${e.photo}"/></div> 
+                <div>${e.description}</div> 
+                <div>${e.datePublication}</div>
+            </div>
+        </c:forEach>
+    </c:if>
 </div>
 
 

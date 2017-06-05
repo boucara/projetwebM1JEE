@@ -45,25 +45,30 @@
 
                         </li>
 
-                        <li><a href="#">Bonjour ${requestScope['utilisateur'].prenom}</a></li>
+                        <li><a href="#">Bonjour ${requestScope['utilisateur'].prenom}</a></li> 
                         <li><a href="Deconnexion">Deconnexion</a></li>
                         </c:when>    
                         <c:otherwise>
+                            <c:if test="${requestScope['utilisateur'] == null}">
+                            <form action="ServeletConnexion" method="post">
+                                <li class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" >
+                                        Se connecter
+                                        <span class="caret"></span>
+                                    </button>
 
-                        <li class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" >
-                                Se connecter
-                                <span class="caret"></span>
-                            </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li> <label>mail :</label> <input type="text" name="mail" class="form-control"/></li>
+                                        <li> <label>MDP :</label> <input type="password" name="mdp" class="form-control"/></li>
+                                       
+                                        <li> <input type="hidden" name="action" value="seConnecter"/> 
+                                            <input type="submit" value="Se Connecter" name="submit" class="btn btn-default"/> 
+                                        </li>
+                                    </ul>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li> <label>mail :</label> <input type="text" name="mail" class="form-control"/></li>
-                                <li> <label>MDP :</label> <input type="password" name="mdp" class="form-control"/></li>
-                                <input type="hidden" name="action" value="seConnecter"/> 
-                                <li><input type="submit" value="Se Connecter" name="submit" class="btn btn-default"/> </li>
-                            </ul>
-
-                        </li>
+                                </li>
+                            </form>
+                        </c:if> 
 
 
                         <li><a href="Inscription">Participer</a></li>
