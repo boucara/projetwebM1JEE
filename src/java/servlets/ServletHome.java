@@ -78,6 +78,8 @@ public class ServletHome extends MaServlet {
         if (request.getParameter("pagination") != null) {
             pagination = Integer.parseInt(request.getParameter("pagination"));
         }
+        request.setAttribute("pagination", pagination);
+        request.setAttribute("nombreEvents", gestionnaireEvents.getNumberEvents());
         return gestionnaireEvents.selectEvents(pagination);
     }
 }

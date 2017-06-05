@@ -56,4 +56,9 @@ public class GestionnaireEvent {
         }
         return collection;
     }
+    
+    public int getNumberEvents() {
+        Query q = em.createQuery("select e from Event e ");
+        return q.getResultList().size();
+    }
 }
