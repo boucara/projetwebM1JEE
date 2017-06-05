@@ -29,11 +29,6 @@ public class ServeletConnexion extends MaServlet {
 
     @Override
     protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
-    protected void processRequestPostCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         String forwardTo = "home.jsp";
         String message = "en attente de connexion";
@@ -61,6 +56,12 @@ public class ServeletConnexion extends MaServlet {
         request.setAttribute("connexion", true);
         RequestDispatcher dp = request.getRequestDispatcher(forwardTo);
         dp.forward(request, response);
+
+    }
+
+    @Override
+    protected void processRequestPostCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
     }
 
     @Override

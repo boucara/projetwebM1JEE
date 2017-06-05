@@ -50,7 +50,7 @@
                         </c:when>    
                         <c:otherwise>
                             <c:if test="${requestScope['utilisateur'] == null}">
-                            <form action="ServeletConnexion" method="post">
+                            
                                 <li class="dropdown">
                                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" >
                                         Se connecter
@@ -61,13 +61,13 @@
                                         <li> <label>mail :</label> <input type="text" name="mail" class="form-control"/></li>
                                         <li> <label>MDP :</label> <input type="password" name="mdp" class="form-control"/></li>
                                        
-                                        <li> <input type="hidden" name="action" value="seConnecter"/> 
-                                            <input type="submit" value="Se Connecter" name="submit" class="btn btn-default"/> 
+                                        <li>  
+                                            <a href="ServeletConnexion?action=seConnecter"> se connecter </a>
                                         </li>
                                     </ul>
 
                                 </li>
-                            </form>
+                            
                         </c:if> 
 
 
