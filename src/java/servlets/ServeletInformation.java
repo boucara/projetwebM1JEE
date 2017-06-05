@@ -24,6 +24,22 @@ public class ServeletInformation extends MaServlet {
 
     @Override
     protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         String action = request.getParameter("action");
+        String forwardTo = "information.jsp";
+        String message = "";
+        if (action != null) {
+            if (action.equals("info")) {
+                forwardTo = "information.jsp";
+                message = "Bienvenue! sur la page d'information";
+
+            }
+        }
+        
+      
+        
+        RequestDispatcher dp = request.getRequestDispatcher(forwardTo);  
+        dp.forward(request, response);
+        
         
     }
 
