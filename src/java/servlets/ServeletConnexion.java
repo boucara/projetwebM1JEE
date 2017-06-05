@@ -33,8 +33,9 @@ public class ServeletConnexion extends MaServlet {
         String forwardTo = "home.jsp";
         String message = "en attente de connexion";
 
-        Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
+        
         if (action != null) {
+            Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
             if (action.equals("seConnecter")) {
                 String mail = request.getParameter("mail");
                 String mdp = request.getParameter("mdp");
