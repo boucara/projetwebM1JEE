@@ -10,6 +10,7 @@
     <div class="container-fluid" id ="content-tshirt" >
         <div class="row content">
             <div class="col-sm-6 sidenav" id ="sidbar">
+                <form action="voteTshirt" method="post">
                 <table class="table">
                     <thead>
                         <tr>
@@ -25,11 +26,14 @@
                                 <td>${t.miage}</td>
                                 <td>${t.pays}</td>
                                 <td><img src="${t.urlphoto}"/></td>
+                                <td>  <label><input type="radio" name="typeTshirt" value="${t.id}" required></td>
                             </tr>
 
                         </c:forEach>
                     </tbody>
                 </table>
+                      <input type="submit" value="Valider" name="submit" class="btn btn-default"/>
+                </form>
             </div>
             <div class="col-sm-6" id ="contenuVideo">
 
