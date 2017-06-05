@@ -25,20 +25,10 @@
         <jsp:include page="header.jsp"/> 
 
         <div class="main">
-            <!-- Contact Container -->
-            <div class="w3-container w3-padding-64 w3-theme-l5" id="contact">
-                <h1>${param.title}</h1>
+            <h1>${param.title}</h1>
 
-                <jsp:include page="${param.content}.jsp"/>
+            <jsp:include page="${param.content}.jsp"/>
                 
-            </div>
-                
-
-
-
-
-
-
         </div>
 
         <jsp:include page="footer.jsp"/>  

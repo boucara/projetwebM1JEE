@@ -7,29 +7,33 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 
-<div>
-    <c:if test="${param['action'] == 'seConnecter'}">
-        <h1>hello connexion reussi </h1>
+<div class="container">
+    <div class="row">
 
-    </c:if>
-    <c:if test="${param['action'] != 'seConnecter'}">
+
         <c:forEach  var="e" items="${requestScope['events']}">
-            <div>
-                <div>${e.nom}</div> 
-                <div><img src="${e.urlphoto}"/></div> 
-                <div>${e.description}</div> 
-                <div>${e.datePublication}</div>
+            <div class="col-sm-4">
+                <h2>${e.nom}</h2>
+                <p><img src="${e.urlphoto}" alt="${e.nom}" style="width:100%;"/></p>
+
+                <p><div>${e.description}</div></p>
+                <p><div>${e.datePublication}</div></p>
             </div>
         </c:forEach>
-    </c:if>
+
+
+    </div>
+    <div class="row">
+        <!-- Left and right controls -->
+        <a class="col-sm-4" href="#myCarousel">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="col-offset-8" href="#myCarousel" >
+            <span class="glyphicon glyphicon-chevron-right"></span>
+
+        </a>
+    </div>
+
 </div>
-
-
-
-
-
-
-
-
 
 
