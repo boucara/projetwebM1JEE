@@ -5,7 +5,6 @@
  */
 package utilisateurs.gestionnaires;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,6 +21,7 @@ public class GestionnaireEtudiants {
 
     @PersistenceContext
     private EntityManager em;
+    
 
     public Etudiant insererEtudiant(Etudiant e) {
         em.persist(e);

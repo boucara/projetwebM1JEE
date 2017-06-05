@@ -6,11 +6,11 @@
 package utilisateurs.gestionnaires;
 
 import java.util.Collection;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import utilisateurs.modeles.Enseignant;
+import javax.ejb.Stateless;
 
 /**
  *
@@ -19,11 +19,11 @@ import utilisateurs.modeles.Enseignant;
 @Stateless
 public class GestionnaireEnseignants {
 
-    @PersistenceContext  
+    @PersistenceContext
     private EntityManager em;
 
-    public void insererEnseignant(Enseignant e) { 
-        em.persist(e);  
+    public void insererEnseignant(Enseignant e) {
+        em.persist(e);
     }
 
     public Enseignant metreajourEnseignant(String email, String nom, String prenom, String mdp) {
@@ -32,23 +32,21 @@ public class GestionnaireEnseignants {
 
     public void supprimerEnseignant(String email) {
     }
-    
+
     public Enseignant selectEnseignant(String email) {
-        Query q = em.createQuery("select e from Enseignant e where e.email='"+email+"'");
-        if(!q.getResultList().isEmpty()) {
-            return (Enseignant)q.getResultList().get(0);
-        }
-        else {
+        Query q = em.createQuery("select e from Enseignant e where e.email='" + email + "'");
+        if (!q.getResultList().isEmpty()) {
+            return (Enseignant) q.getResultList().get(0);
+        } else {
             return null;
         }
     }
 
     public Enseignant selectEnseignant(String email, String pwd) {
-        Query q = em.createQuery("select e from Enseignant e where e.email='"+email+"' and e.mdp='"+pwd+"'");
-        if(!q.getResultList().isEmpty()) {
-            return (Enseignant)q.getResultList().get(0);
-        }
-        else {
+        Query q = em.createQuery("select e from Enseignant e where e.email='" + email + "' and e.mdp='" + pwd + "'");
+        if (!q.getResultList().isEmpty()) {
+            return (Enseignant) q.getResultList().get(0);
+        } else {
             return null;
         }
     }
@@ -64,7 +62,7 @@ public class GestionnaireEnseignants {
     public int nombreEnseignants() {
         return 0;
     }
-    
+
     public int nombreEnseignants(String email, String nom, String prenom) {
         return 0;
     }
