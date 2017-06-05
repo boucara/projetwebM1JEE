@@ -7,14 +7,39 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:if test="${param['action'] == 'creerTshirtconcour'}">
-    <c:forEach  var="t" items="${requestScope['concour']}">
-        <div>${t.miage}</div> 
-        <div>${t.pays}</div> 
-        <div><img src="${t.urlphoto}"/></div>
+    <div class="container-fluid" id ="content-tshirt" >
+        <div class="row content">
+            <div class="col-sm-6 sidenav" id ="sidbar">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Miage</th>
+                            <th>Pays Associé</th>
+                            <th>Image Associée</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach  var="t" items="${requestScope['concour']}">
 
-    </c:forEach>
-    <form action="ServeletTshirt" method="get">  
-        <input type="button" value="partiConcour" name="button" class="btn btn-default" />  
-    </form>
+                            <tr>
+                                <td>${t.miage}</td>
+                                <td>${t.pays}</td>
+                                <td><img src="${t.urlphoto}"/></td>
+                            </tr>
+
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6" id ="contenuVideo">
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 </c:if> 
 
