@@ -37,6 +37,8 @@
 
                 </div>
                 <div class="col-sm-6">
+                    <h2>Hebergement des Etudiants</h2>
+                    <p>Hotel Salvator</p>
                     <p>29 passage central, 68100 MULHOUSE</p>
 
                     <div id="map" style="height:300px; width:500px"></div>
