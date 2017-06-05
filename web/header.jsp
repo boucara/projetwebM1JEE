@@ -27,7 +27,7 @@
         <div class="collapse navbar-collapse" id="menu">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="Accueil">HOME</a></li>
-                <li><a href="#">Informations pratiques</a></li>
+                <li><a href="DesInformation?action=info">Informations pratiques</a></li>
 
                 <c:choose>
                     <c:when test="${requestScope['connexion'] != null && requestScope['connexion'] == 'true'}">
