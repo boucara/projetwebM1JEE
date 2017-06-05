@@ -16,7 +16,7 @@
         <c:forEach  var="e" items="${requestScope['events']}">
             <div>
                 <div>${e.nom}</div> 
-                <div><img src="${e.photo}"/></div> 
+                <div><img src="${e.urlphoto}"/></div> 
                 <div>${e.description}</div> 
                 <div>${e.datePublication}</div>
             </div>

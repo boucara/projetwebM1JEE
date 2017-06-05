@@ -132,6 +132,7 @@ public class ServeltInscription extends MaServlet {
                 } catch (ParseException ex) {
                     Logger.getLogger(ServeltInscription.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                System.out.println("photo : " + request.getParameter("photo"));
                 etudiant.setImage(request.getParameter("photo").getBytes());
                 gestionnaireEtudiants.insererEtudiant(etudiant);
                 request.getSession().setAttribute("utilisateur", etudiant);

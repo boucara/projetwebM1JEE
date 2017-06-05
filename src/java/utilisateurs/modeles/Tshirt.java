@@ -7,14 +7,13 @@ package utilisateurs.modeles;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 /**
  *
@@ -29,16 +28,27 @@ public class Tshirt implements Serializable {
    
     private String miage;
     private String pays;
-     @OneToOne(cascade={CascadeType.ALL}, fetch=FetchType.EAGER)
-     Photo img;
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    private byte[] photo;
+    @Transient
+    private String urlphoto;
+
+    public String getUrlphoto() {
+        return urlphoto;
+    }
+
+    public void setUrlphoto(String urlphoto) {
+        this.urlphoto = urlphoto;
+    }
     
     public Tshirt(){
         
     }
-    public Tshirt(String miage , String pays,Photo img){
+    public Tshirt(String miage , String pays,byte[] photo){
         this.miage=miage;
         this.pays=pays;
-        this.img=img;
+        this.photo=photo;
        
     }
     public Long getId() {
@@ -86,12 +96,12 @@ public class Tshirt implements Serializable {
     public void setPays(String pays){
         this.pays=pays;
     }
-     public Photo getImg() {
-        return img;
+     public byte[] getPhoto() {
+        return photo;
     }
 
-    public void setImage(Photo img) {
-        this.img = img;
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
     
 }

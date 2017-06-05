@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -29,6 +30,16 @@ public class Etudiant extends Utilisateur implements Serializable {
     @Lob
     @Basic(fetch = FetchType.EAGER)
     private byte[] image;
+    @Transient
+    private String urlphoto;
+
+    public String getUrlphoto() {
+        return urlphoto;
+    }
+
+    public void setUrlphoto(String urlphoto) {
+        this.urlphoto = urlphoto;
+    }
 
     public Etudiant() {
 

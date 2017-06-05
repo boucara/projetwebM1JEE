@@ -10,7 +10,7 @@
     <c:forEach  var="t" items="${requestScope['concour']}">
         <div>${t.miage}</div> 
         <div>${t.pays}</div> 
-        <div>${t.img}</div>
+        <div><img src="${t.urlphoto}"/></div>
 
     </c:forEach>
     <form action="ServeletTshirt" method="get">  

@@ -15,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utilisateurs.gestionnaires.GestionnairePhoto;
 import utilisateurs.gestionnaires.GestionnaireTshirt;
 import utilisateurs.modeles.Tshirt;
 import utilisateurs.modeles.Utilisateur;
@@ -29,7 +28,6 @@ public class ServeletTshirt extends MaServlet {
 
     @EJB
     private GestionnaireTshirt gestionnaireTshirt;
-    private GestionnairePhoto  gestionnairePhoto;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
