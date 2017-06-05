@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utilisateurs.gestionnaires.GestionnaireBegin;
 import utilisateurs.gestionnaires.GestionnaireEvent;
 import utilisateurs.modeles.Event;
 import utilisateurs.modeles.Utilisateur;
@@ -25,6 +26,8 @@ import utilisateurs.modeles.Utilisateur;
 public class ServletHome extends MaServlet {
     @EJB
     private GestionnaireEvent gestionnaireEvents;    
+    @EJB
+    private GestionnaireBegin gestionnaireBegin;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,6 +40,7 @@ public class ServletHome extends MaServlet {
      */
     @Override
     protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
         request.setAttribute("utilisateur", user);
         request.setAttribute("connexion", true);
