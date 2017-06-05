@@ -34,7 +34,7 @@ public class GestionnaireEnseignants {
     }
     
     public Enseignant selectEnseignant(String email) {
-        Query q = em.createQuery("select u from Utilisateur u where u.email='"+email+"'");
+        Query q = em.createQuery("select e from Enseignant e where e.email='"+email+"'");
         if(!q.getResultList().isEmpty()) {
             return (Enseignant)q.getResultList().get(0);
         }
@@ -44,7 +44,13 @@ public class GestionnaireEnseignants {
     }
 
     public Enseignant selectEnseignant(String email, String pwd) {
-        return null;
+        Query q = em.createQuery("select e from Enseignant e where e.email='"+email+"' and e.mdp='"+pwd+"'");
+        if(!q.getResultList().isEmpty()) {
+            return (Enseignant)q.getResultList().get(0);
+        }
+        else {
+            return null;
+        }
     }
 
     public Collection<Enseignant> selectEnseignants(int pagination) {

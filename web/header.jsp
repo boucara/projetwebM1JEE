@@ -52,19 +52,16 @@
                             <c:if test="${requestScope['utilisateur'] == null}">
                             
                                 <li class="dropdown">
-                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" >
+                                    <a class="dropdown-toggle" data-toggle="dropdown" >
                                         Se connecter
                                         <span class="caret"></span>
-                                    </button>
+                                    </a>
 
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li> <label>mail :</label> <input type="text" name="mail" class="form-control"/></li>
-                                        <li> <label>MDP :</label> <input type="password" name="mdp" class="form-control"/></li>
-                                       
-                                        <li>  
-                                            <a href="ServeletConnexion?action=seConnecter"> se connecter </a>
-                                        </li>
-                                    </ul>
+                                    <form class="dropdown-menu" aria-labelledby="dropdownMenu1" action="Connexion" method="post">
+                                        <div class="form-group"> <label for="mail">Mail :</label> <input type="text" id="mail" required name="mail" class="form-control"/></div>
+                                        <div class="form-group"> <label for="mdpco">MDP :</label> <input type="password" pattern="^[a-z0-9A-Z]{6,20}" id="mdpco" required name="mdpco" class="form-control"/></div>
+                                        <input type="submit" value="Valider" name="submit" class="btn btn-default"/>
+                                    </form>
 
                                 </li>
                             

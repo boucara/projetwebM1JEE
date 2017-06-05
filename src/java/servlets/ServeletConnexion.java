@@ -14,62 +14,71 @@ import javax.servlet.annotation.WebServlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utilisateurs.gestionnaires.GestionnaireUtilisateur;
+import utilisateurs.gestionnaires.GestionnaireEnseignants;
+import utilisateurs.gestionnaires.GestionnaireEntreprises;
+import utilisateurs.gestionnaires.GestionnaireEtudiants;
 import utilisateurs.modeles.Utilisateur;
 
 /**
  *
  * @author Aicha
  */
-@WebServlet(name = "ServeletConnexion", urlPatterns = {"/ServeletConnexion"})
+@WebServlet(name = "ServeletConnexion", urlPatterns = {"/Connexion"})
 public class ServeletConnexion extends MaServlet {
 
     @EJB
-    private GestionnaireUtilisateur gestionnaireUtilisateur;
+    private GestionnaireEntreprises gestionnaireEntreprises;
+    @EJB
+    private GestionnaireEnseignants gestionnaireEnseignants;
+    @EJB
+    private GestionnaireEtudiants gestionnaireEtudiants;
 
     @Override
     protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String forwardTo = "Accueil";
+        RequestDispatcher dp = request.getRequestDispatcher(forwardTo);
+        dp.forward(request, response);
     }
 
     @Override
     protected void processRequestPostCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String forwardTo = "Accueil";
+        RequestDispatcher dp = request.getRequestDispatcher(forwardTo);
+        dp.forward(request, response);
     }
 
     @Override
     protected void processRequestGetDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        String forwardTo = "home.jsp";
-        String message = "en attente de connexion";
-
-        if (action != null) {
-            Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
-            if (action.equals("seConnecter")) {
-                String mail = request.getParameter("mail");
-                String mdp = request.getParameter("mdp");
-                Utilisateur user = gestionnaireUtilisateur.getUser(mail, mdp);
-                if (user != null) {
-                    request.getSession().setAttribute("utilisateur", user);
-                    message = "Utilisateur connecté";
-                    utilisateur = user;
-
-                } else {
-                    message = "Mot de passe ou mail incorrect";
-
-                }
-                forwardTo = "home.jsp?action=seConnecter";
-            }
-        }
-        
+        String forwardTo = "Accueil";
         RequestDispatcher dp = request.getRequestDispatcher(forwardTo);
         dp.forward(request, response);
-
     }
 
     @Override
     protected void processRequestPostDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String action = request.getParameter("action");
+        String forwardTo = "Accueil";
+
+        String mail = request.getParameter("mail");
+        String mdp = request.getParameter("mdpco");
+        Utilisateur user = gestionnaireEnseignants.selectEnseignant(mail, mdp);
+        if(user != null){
+            request.getSession().setAttribute("utilisateur", user);
+            request.getSession().setAttribute("connexion", true);
+        }
+        user = gestionnaireEntreprises.selectEntreprise(mail, mdp);
+        if(user != null){
+            request.getSession().setAttribute("utilisateur", user);
+            request.getSession().setAttribute("connexion", true);
+        }
+        user = gestionnaireEtudiants.selectEtudiant(mail, mdp);
+        if(user != null){
+            request.getSession().setAttribute("utilisateur", user);
+            request.getSession().setAttribute("connexion", true);
+        }
+        
+        RequestDispatcher dp = request.getRequestDispatcher(forwardTo);
+        dp.forward(request, response);
     }
 
 }
