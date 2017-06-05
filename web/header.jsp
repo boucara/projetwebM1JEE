@@ -49,23 +49,19 @@
                         <li><a href="Deconnexion">Deconnexion</a></li>
                         </c:when>    
                         <c:otherwise>
-                            <c:if test="${requestScope['utilisateur'] == null}">
-                            
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" >
-                                        Se connecter
-                                        <span class="caret"></span>
-                                    </a>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" >
+                                Se connecter
+                                <span class="caret"></span>
+                            </a>
 
-                                    <form class="dropdown-menu" aria-labelledby="dropdownMenu1" action="Connexion" method="post">
-                                        <div class="form-group"> <label for="mail">Mail :</label> <input type="text" id="mail" required name="mail" class="form-control"/></div>
-                                        <div class="form-group"> <label for="mdpco">MDP :</label> <input type="password" pattern="^[a-z0-9A-Z]{6,20}" id="mdpco" required name="mdpco" class="form-control"/></div>
-                                        <input type="submit" value="Valider" name="submit" class="btn btn-default"/>
-                                    </form>
+                            <form class="dropdown-menu" aria-labelledby="dropdownMenu1" action="Connexion" method="post">
+                                <div class="form-group"> <label for="mail">Mail :</label> <input type="text" id="mail" required name="mail" class="form-control"/></div>
+                                <div class="form-group"> <label for="mdpco">MDP :</label> <input type="password" pattern="^[a-z0-9A-Z]{6,20}" id="mdpco" required name="mdpco" class="form-control"/></div>
+                                <input type="submit" value="Valider" name="submit" class="btn btn-default"/>
+                            </form>
 
-                                </li>
-                            
-                        </c:if> 
+                        </li>
 
 
                         <li><a href="Inscription">Participer</a></li>

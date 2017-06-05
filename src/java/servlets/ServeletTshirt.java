@@ -46,7 +46,7 @@ public class ServeletTshirt extends MaServlet {
 
         if (action != null) {
             if (action.equals("creerTshirtconcour")) {
-                gestionnaireTshirt.creerTshirtconcour();
+                //gestionnaireTshirt.creerTshirtconcour();
 
                 Collection<Tshirt> listshirt = gestionnaireTshirt.getTshirtConcour();
                 request.setAttribute("concour", listshirt);
