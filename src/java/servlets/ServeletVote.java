@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utilisateurs.gestionnaires.GestionnaireVote;
+import utilisateurs.modeles.Tshirt;
 import utilisateurs.modeles.Utilisateur;
 
 /**
@@ -24,8 +25,9 @@ import utilisateurs.modeles.Utilisateur;
 @WebServlet(name = "ServeletVote", urlPatterns = {"/Vote"})
 public class ServeletVote extends MaServlet {
 
-     @EJB
+    @EJB
     private GestionnaireVote gestionnaireVote;
+
     @Override
     protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -33,24 +35,20 @@ public class ServeletVote extends MaServlet {
 
     @Override
     protected void processRequestPostCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         String forwardTo = "classementVote.jsp";
         String message = "Resultat vote";
 
+        int id = Integer.parseInt(request.getParameter("typeTshirt"));
+        Utilisateur user = (Utilisateur) request.getSession().getAttribute("utilisateur");
+        Tshirt t = gestionnaireVote.getTshirt(id);
+        gestionnaireVote.creeVote(t, user);
+        int result = gestionnaireVote.compterVote(id);
+        request.setAttribute("voteTotal", result);
         
-                int id = Integer.parseInt(request.getParameter("typeTshirt"));
-                int result =gestionnaireVote.compterVote(id);
-                request.setAttribute("voteTotal", result);
-           
-               
-                
-                
-            
-        
-        Utilisateur user = (Utilisateur)request.getSession().getAttribute("utilisateur");
         request.setAttribute("utilisateur", user);
         request.setAttribute("connexion", true);
-        RequestDispatcher dp = request.getRequestDispatcher(forwardTo);  
+        RequestDispatcher dp = request.getRequestDispatcher(forwardTo);
         dp.forward(request, response);
     }
 

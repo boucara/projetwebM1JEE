@@ -8,4 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:if test="${param['action'] == 'voteTshirt'}">
     <h1> Classement des Tshirts</h1>
+    <c:forEach  var="v" items="${requestScope['concour']}">
+    <h1>  ${v}</h1>
+    </c:forEach>
 </c:if>

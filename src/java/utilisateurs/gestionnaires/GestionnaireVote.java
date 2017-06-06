@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import utilisateurs.modeles.Tshirt;
 import utilisateurs.modeles.Utilisateur;
 import utilisateurs.modeles.Vote;
 
@@ -25,6 +26,12 @@ public class GestionnaireVote {
    
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+    public Vote creeVote( Tshirt t, Utilisateur u) {  
+        
+        Vote v = new Vote( t, u);  
+        em.persist(v);  
+        return v;  
+    } 
 
     public int compterVote(int id) {
         int result = 0;
@@ -41,10 +48,21 @@ public class GestionnaireVote {
         return result;
 
     }
+    public Tshirt getTshirt(int id){
+        Query q = em.createQuery("select t from Tshirt t where t.id='"+id+"'");
+        if(q.getSingleResult()!=null) {
+            return (Tshirt) q.getSingleResult();
+        }
+        else {
+            return null;
+        }
+        
+        
+    }
 
     public Collection<Vote> getVotesList() {
         // Exécution d'une requête équivalente à un select *  
-        Query q = em.createQuery("select v from Vote u");
+        Query q = em.createQuery("select v from Vote v");
         return q.getResultList();
     }
 }
