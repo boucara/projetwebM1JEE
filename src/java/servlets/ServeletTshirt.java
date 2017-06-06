@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utilisateurs.gestionnaires.GestionnaireTshirt;
+import utilisateurs.gestionnaires.GestionnaireVote;
 import utilisateurs.modeles.Tshirt;
 import utilisateurs.modeles.Utilisateur;
 
@@ -28,7 +29,8 @@ public class ServeletTshirt extends MaServlet {
 
     @EJB
     private GestionnaireTshirt gestionnaireTshirt;
-
+ @EJB
+    private GestionnaireVote gestionnaireVote;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -65,7 +67,27 @@ public class ServeletTshirt extends MaServlet {
 
     @Override
     protected void processRequestPostCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String vote= request.getParameter("vote");
+        String forwardTo = "tshirt.jsp";
+        String message = "";
+
+        if(vote!=null){
+            if(vote.equals("voteTshirt")){
+                int id = Integer.parseInt(request.getParameter("typeTshirt"));
+                int result =gestionnaireVote.compterVote(id);
+                request.setAttribute("voteTotal", result);
+                forwardTo = "classeVote.jsp?action=voteTshirt";
+                message = "Resultat vote ";
+                System.out.println(forwardTo);
+                
+                
+            }
+        }
+        Utilisateur user = (Utilisateur)request.getSession().getAttribute("utilisateur");
+        request.setAttribute("utilisateur", user);
+        request.setAttribute("connexion", true);
+        RequestDispatcher dp = request.getRequestDispatcher(forwardTo);  
+        dp.forward(request, response);
     }
 
     @Override
