@@ -11,7 +11,7 @@
     <c:forEach  var="v" items="${requestScope['concour']}">
     <h1>  ${v}</h1>
     </c:forEach>
-    <c:forEach  var="v" items="${requestScope['tshirt']}">
+    <c:forEach  var="t" items="${requestScope['tshirt']}">
     <div>>${t.miage}</div>
     <div>${t.pays}</div>
     </c:forEach>
