@@ -43,7 +43,7 @@ public class ServeletTshirt extends MaServlet {
     @Override
     protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        String forwardTo = "tshirt.jsp";
+        String forwardTo = "classementVote.jsp";
         String message = "salut";
 
         if (action != null) {
@@ -76,7 +76,7 @@ public class ServeletTshirt extends MaServlet {
                 int id = Integer.parseInt(request.getParameter("typeTshirt"));
                 int result =gestionnaireVote.compterVote(id);
                 request.setAttribute("voteTotal", result);
-                forwardTo = "classeVote.jsp?action=voteTshirt";
+                forwardTo = "classementVote.jsp?action=voteTshirt";
                 message = "Resultat vote ";
                 System.out.println(forwardTo);
                 
