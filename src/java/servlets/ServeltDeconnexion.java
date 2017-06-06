@@ -42,6 +42,7 @@ public class ServeltDeconnexion extends MaServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         request.getSession().removeAttribute("utilisateur");
         request.getSession().setAttribute("connexion", false);
+        request.getSession().setAttribute("admin", false);
         RequestDispatcher dp = request.getRequestDispatcher("Accueil");  
         dp.forward(request, response); 
     }

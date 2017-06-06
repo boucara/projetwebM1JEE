@@ -123,7 +123,7 @@ public class ServeltInscription extends MaServlet {
             } else {
                 Etudiant etudiant = (Etudiant) user;
                 etudiant.setAncien(request.getParameter("ancien") != null);
-                etudiant.setVilleEtu(request.getParameter("miage"));
+                etudiant.setVilEtu(request.getParameter("miage"));
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
                 Date date;
                 try {

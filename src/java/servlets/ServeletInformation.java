@@ -42,17 +42,22 @@ public class ServeletInformation extends MaServlet {
 
     @Override
     protected void processRequestGetDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("admin") != null && (boolean)request.getSession().getAttribute("admin")) {
+            request.setAttribute("admin", true);
+        }
         processRequest(request, response);
-        
+
     }
 
     @Override
     protected void processRequestPostDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute("admin") != null && (boolean)request.getSession().getAttribute("admin")) {
+            request.setAttribute("admin", true);
+        }
         processRequest(request, response);
     }
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
-    {
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         String forwardTo = "information.jsp";
         String message = "";
@@ -63,7 +68,7 @@ public class ServeletInformation extends MaServlet {
 
             }
         }
-        RequestDispatcher dp = request.getRequestDispatcher(forwardTo);  
+        RequestDispatcher dp = request.getRequestDispatcher(forwardTo);
         dp.forward(request, response);
     }
 }

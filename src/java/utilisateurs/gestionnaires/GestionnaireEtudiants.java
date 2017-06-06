@@ -63,12 +63,19 @@ public class GestionnaireEtudiants {
             int numUpdates = q.executeUpdate();
         
     }
-    
 
-    public Collection<Etudiant> getAllUsers() {
+    public Collection<Etudiant> getAllUsers(int pagination) {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select e from Etudiant e");
+        q.setFirstResult(pagination);
+        q.setMaxResults(10);
         return q.getResultList();
+    }
+    
+    public int getNumberUsers() {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select e from Etudiant e");
+        return q.getResultList().size();
     }
 
 }

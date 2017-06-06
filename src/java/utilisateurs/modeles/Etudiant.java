@@ -73,12 +73,12 @@ public class Etudiant extends Utilisateur implements Serializable {
         return true;
     }
 
-    public String getVilleEtu() {
+    public String getVilEtu() {
         return vilEtu;
 
     }
 
-    public void setVilleEtu(String vilEtu) {
+    public void setVilEtu(String vilEtu) {
         this.vilEtu = vilEtu;
     }
 

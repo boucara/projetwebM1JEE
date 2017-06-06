@@ -111,13 +111,13 @@ public class GestionnaireBegin {
         for (int i = 0; i < data.size(); i++) {
             if (i % 2 == 0) {
 
-                data.get(i).setVilleEtu("Nice");
+                data.get(i).setVilEtu("Nice");
             }
-            if (i % 3 == 0) {
+            else if (i % 3 == 0) {
                 data.get(i).setAncien(true);
-                data.get(i).setVilleEtu("Lyon");
+                data.get(i).setVilEtu("Lyon");
             } else {
-                data.get(i).setVilleEtu("Lyon");
+                data.get(i).setVilEtu("Lyon");
             }
             data.get(i).setImage(imgetudiant.getBytes());
             data.get(i).setDateNaissance(date);

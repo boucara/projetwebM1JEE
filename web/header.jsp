@@ -26,11 +26,22 @@
         </div>
         <div class="collapse navbar-collapse" id="menu">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="Accueil">HOME</a></li>
+                <li><a href="Accueil">Accueil</a></li>
                 <li><a href="DesInformation?action=info">Informations pratiques</a></li>
 
                 <c:choose>
-                    <c:when test="${requestScope['connexion'] != null && requestScope['connexion'] == 'true'}">
+                    <c:when test="${requestScope['admin'] != null && requestScope['admin'] == 'true'}">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" >Administration
+                                <span class="caret"></span></a>
+
+                            <ul class="dropdown-menu">
+                                <li><a href="GestionUtilisateur">Gérer Utilisateurs</a></li>  
+                            </ul>
+                        </li> 
+                        <li><a href="Deconnexion">Deconnexion</a></li>
+                        </c:when> 
+                        <c:when test="${requestScope['connexion'] != null && requestScope['connexion'] == 'true'}">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" >Activités
                                 <span class="caret"></span></a>
@@ -57,7 +68,7 @@
 
                             <form class="dropdown-menu" aria-labelledby="dropdownMenu1" action="Connexion" method="post">
                                 <div class="form-group"> <label for="mail">Mail :</label> <input type="text" id="mail" required name="mail" class="form-control"/></div>
-                                <div class="form-group"> <label for="mdpco">MDP :</label> <input type="password" pattern="^[a-z0-9A-Z]{6,20}" id="mdpco" required name="mdpco" class="form-control"/></div>
+                                <div class="form-group"> <label for="mdpco">MDP :</label> <input type="password" pattern="^[a-z0-9A-Z_]{6,20}" id="mdpco" required name="mdpco" class="form-control"/></div>
                                 <input type="submit" value="Valider" name="submit" class="btn btn-default"/>
                             </form>
 

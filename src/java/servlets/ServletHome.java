@@ -65,6 +65,9 @@ public class ServletHome extends MaServlet {
     protected void processRequestGetDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("message", "Hello World");
         request.setAttribute("events", getEvents(request));
+        if (request.getSession().getAttribute("admin") != null && (boolean)request.getSession().getAttribute("admin")) {
+            request.setAttribute("admin", true);
+        }
         RequestDispatcher dp = request.getRequestDispatcher("home.jsp");
         dp.forward(request, response);
     }
@@ -73,6 +76,9 @@ public class ServletHome extends MaServlet {
     protected void processRequestPostDeco(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("message", "Hello World");
         request.setAttribute("events", getEvents(request));
+        if (request.getSession().getAttribute("admin") != null && (boolean)request.getSession().getAttribute("admin")) {
+            request.setAttribute("admin", true);
+        }
         RequestDispatcher dp = request.getRequestDispatcher("home.jsp");
         dp.forward(request, response);
     }

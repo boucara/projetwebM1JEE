@@ -61,22 +61,26 @@ public class ServeletConnexion extends MaServlet {
 
         String mail = request.getParameter("mail");
         String mdp = request.getParameter("mdpco");
-        Utilisateur user = gestionnaireEnseignants.selectEnseignant(mail, mdp);
-        if(user != null){
-            request.getSession().setAttribute("utilisateur", user);
-            request.getSession().setAttribute("connexion", true);
+        if (!mail.equals("admin_jnm") && !mdp.equals("admin_jnm")) {
+            Utilisateur user = gestionnaireEnseignants.selectEnseignant(mail, mdp);
+            if (user != null) {
+                request.getSession().setAttribute("utilisateur", user);
+                request.getSession().setAttribute("connexion", true);
+            }
+            user = gestionnaireEntreprises.selectEntreprise(mail, mdp);
+            if (user != null) {
+                request.getSession().setAttribute("utilisateur", user);
+                request.getSession().setAttribute("connexion", true);
+            }
+            user = gestionnaireEtudiants.selectEtudiant(mail, mdp);
+            if (user != null) {
+                request.getSession().setAttribute("utilisateur", user);
+                request.getSession().setAttribute("connexion", true);
+            }
+        }else{
+            request.getSession().setAttribute("admin", true);
         }
-        user = gestionnaireEntreprises.selectEntreprise(mail, mdp);
-        if(user != null){
-            request.getSession().setAttribute("utilisateur", user);
-            request.getSession().setAttribute("connexion", true);
-        }
-        user = gestionnaireEtudiants.selectEtudiant(mail, mdp);
-        if(user != null){
-            request.getSession().setAttribute("utilisateur", user);
-            request.getSession().setAttribute("connexion", true);
-        }
-        
+
         RequestDispatcher dp = request.getRequestDispatcher(forwardTo);
         dp.forward(request, response);
     }
