@@ -7,6 +7,8 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.Collections;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utilisateurs.gestionnaires.GestionnaireTshirt;
 import utilisateurs.gestionnaires.GestionnaireVote;
 import utilisateurs.modeles.Tshirt;
 import utilisateurs.modeles.Utilisateur;
@@ -27,6 +30,8 @@ public class ServeletVote extends MaServlet {
 
     @EJB
     private GestionnaireVote gestionnaireVote;
+     @EJB
+    private GestionnaireTshirt gestionnaireTshirt;
 
     @Override
     protected void processRequestGetCo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,9 +49,13 @@ public class ServeletVote extends MaServlet {
         Tshirt t = gestionnaireVote.getTshirt(id);
         gestionnaireVote.creeVote(t, user);
         int result = gestionnaireVote.compterVote(id);
+        Collection<Tshirt> listshirt = gestionnaireTshirt.getTshirtConcour();
+        
         request.setAttribute("voteTotal", result);
         
+        
         request.setAttribute("utilisateur", user);
+        request.setAttribute("tshirt",listshirt);
         request.setAttribute("connexion", true);
         RequestDispatcher dp = request.getRequestDispatcher(forwardTo);
         dp.forward(request, response);
