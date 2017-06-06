@@ -10,7 +10,7 @@
     <div class="container-fluid" id ="content-tshirt" >
         <div class="row content">
             <div class="col-sm-6 sidenav" id ="sidbar">
-                <form action="Tshirt" method="post">
+                <form action="Vote" method="post">
                 <table class="table">
                     <thead>
                         <tr>
