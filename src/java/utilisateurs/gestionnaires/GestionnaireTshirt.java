@@ -44,6 +44,7 @@ public class GestionnaireTshirt {
         creerTshirt("Nantes", "République Tchéque", photo.getBytes());
 
     }
+   
 
     public Collection<Tshirt> getTshirtConcour() {
         // Exécution d'une requête équivalente à un select *  
