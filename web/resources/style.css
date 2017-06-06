@@ -122,3 +122,11 @@ footer a:hover {
   background-size: cover; 
 }
 
+ul.pagination {
+    list-style: none; /* enlever les puces */
+    margin: 0; /* enlever les marges automatiques */
+}
+ 
+ul.pagination li {
+    display: table-cell; /* affichage en ligne */
+}

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import utilisateurs.gestionnaires.GestionnaireEnseignants;
 import utilisateurs.gestionnaires.GestionnaireEntreprises;
 import utilisateurs.gestionnaires.GestionnaireEtudiants;
+import utilisateurs.modeles.Etudiant;
 
 /**
  *
@@ -53,6 +54,13 @@ public class ServeltGestionUtilisateur extends MaServlet {
             if (request.getParameter("pagination") != null) {
                 pagination = Integer.parseInt(request.getParameter("pagination"));
             }
+            String action = request.getParameter("action");
+            if(action != null){
+                if(action.equals("deleteEtudiant")){
+                    int idEtud = Integer.parseInt(request.getParameter("idEtudiant"));
+                    gestionnaireEtudiants.deleteEtudiant(idEtud);
+                }
+            }
             request.setAttribute("action", "listerLesEtudiants");
             request.setAttribute("listeEtudiants", gestionnaireEtudiants.getAllUsers(pagination));
             request.setAttribute("nombreEtudiants", gestionnaireEtudiants.getNumberUsers());
@@ -74,6 +82,27 @@ public class ServeltGestionUtilisateur extends MaServlet {
             int pagination = 0;
             if (request.getParameter("pagination") != null) {
                 pagination = Integer.parseInt(request.getParameter("pagination"));
+            }
+            String action = request.getParameter("action");
+            if(action != null){
+                if(action.equals("ajouterEtudiant")){
+                    String nom = request.getParameter("nom");
+                    String prenom = request.getParameter("prenom");
+                    String email = request.getParameter("email");
+                    String vilEtud = request.getParameter("vilEtu");
+                    String photo = request.getParameter("photo");
+                    String pwd = request.getParameter("mdp");
+                    Etudiant etud = new Etudiant(email, nom, prenom, pwd);
+                    etud.setVilEtu(vilEtud);
+                    etud.setImage(photo.getBytes());
+                    gestionnaireEtudiants.insererEtudiant(etud);
+                }else if(action.equals("updateEtudiant")){
+                    String nom = request.getParameter("nom");
+                    String prenom = request.getParameter("prenom");
+                    String email = request.getParameter("email");
+                    String vilEtud = request.getParameter("vilEtu");
+                    gestionnaireEtudiants.modifEtudiant(nom, prenom, email, vilEtud);
+                }
             }
             request.setAttribute("action", "listerLesEtudiants");
             request.setAttribute("listeEtudiants", gestionnaireEtudiants.getAllUsers(pagination));

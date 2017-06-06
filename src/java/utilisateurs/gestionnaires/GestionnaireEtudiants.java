@@ -48,18 +48,19 @@ public class GestionnaireEtudiants {
         }
     }
 
-    public void modifEtudiant(String nom, String prenom, String login, String mdp) {
-
-        Query q = em.createQuery("update Etudiant e set e.nom= :nom  , e.prenom=:prenom ,e.email=:email  , e.mdp=:mdp  where  e.email=:email ");
+    public void modifEtudiant(String nom, String prenom, String login, String vilEtu) {
+        System.out.println(login);
+        Query q = em.createQuery("update Etudiant e set e.nom= :nom  , e.prenom=:prenom  , e.vilEtu=:vilEtu  where  e.email=:email ");
         q.setParameter("nom", nom);
         q.setParameter("prenom", prenom);
-        q.setParameter("login", login);
-        q.setParameter("mdp", mdp);
+        q.setParameter("email", login);
+        q.setParameter("vilEtu", vilEtu);
         int numUpdates = q.executeUpdate();
+        System.out.println(numUpdates);
     }
-    public void deleteEtudiant (String email ,String nom, String prenom, String mdp){
-        Query q= em.createQuery("delete from Etudiant e where e.email=:email  "); 
-            q.setParameter("email", email);
+    public void deleteEtudiant (int id){
+        Query q= em.createQuery("delete from Etudiant e where e.id=:id  "); 
+            q.setParameter("id", id);
             int numUpdates = q.executeUpdate();
         
     }
@@ -69,7 +70,11 @@ public class GestionnaireEtudiants {
         Query q = em.createQuery("select e from Etudiant e");
         q.setFirstResult(pagination);
         q.setMaxResults(10);
-        return q.getResultList();
+        Collection<Etudiant> collection = q.getResultList();
+        for(Etudiant e : collection){
+            e.setUrlphoto(new String(e.getImage()));
+        }
+        return collection;
     }
     
     public int getNumberUsers() {
